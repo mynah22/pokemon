@@ -1,0 +1,10 @@
+per poke additions:
+
+base stats
+properly passed xpr
+ev values
+ev flag
+evlvl
+faintxp
+moveset(future)
+type(future)
