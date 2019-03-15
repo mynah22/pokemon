@@ -41,12 +41,11 @@ class statholder(object):
 	def rj(self, x):
 		for s in self.stats.statNames:
 			self.stats.iv[s]=x
-				if s=='hp':
-					self.stats.calchp(a.self)
-				else:
-					self.stats.calcstat(s,a.self)
-...     print self.stats.stats
-...
+			if s=='hp':
+				self.stats.calchp(a.self)
+			else:
+				self.stats.calcstat(s,a.self)
+		print self.stats.stats
 #		return ((((self.base[st]+self.iv[st])*2+(sqrt(self.ev[st])/4))*lvl)/100)+5
 
 #	def calciv(self, level, stat, base, ev=0, p=1.0):

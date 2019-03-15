@@ -67,7 +67,7 @@ MtMoon.borders=[7,9]
 
 MtMoonB1=zone()
 #id 9
-MtMoon1.pokelist=[(41,60,7,11),(74,26,7,9),(46,10,10,10),(35,4,9,9)]
+MtMoonB1.pokelist=[(41,60,7,11),(74,26,7,9),(46,10,10,10),(35,4,9,9)]
 MtMoonB1.name='Mt.Moon Basement 1'
 MtMoonB1.nullflag=0
 MtMoonB1.borders=[8,10]

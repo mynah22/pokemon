@@ -5,6 +5,7 @@ from menus import *
 from roll import *
 from swap import *
 from zones import zonelist
+from attacks import Struggle
 
 def hpbar(per=50):
     if per < 1:
@@ -61,9 +62,62 @@ def hunt(pl):
         
         #user selection = attack
         if inp=='attack':
-            pl.team[0].attack(rmon)
-            rmon.attack(pl.team[0])
-
+            #pl.team[0].attack(rmon)
+            clear()
+            #player atk
+            atkid=atkMenu(pl.team[0])
+            if atkid != 5:
+            #if at least 1 move with positive PP
+                print pl.team[0].name+' uses '+pl.team[0].moveset[atkid].name+"!"
+                plMonPreAtkHP=pl.team[0].hp
+                rmonPreAtkHP=rmon.hp
+                if pl.team[0].moveset[atkid].cast(pl.team[0], rmon):
+                    print rmon.name +' took '+str(rmonPreAtkHP-rmon.hp)+' damage!'
+                    if not plMonPreAtkHP == pl.team[0].hp: 
+                        print pl.team[0].name +' took '+str(plMonPreAtkHP - pl.team[0].hp)+' damage!'
+                else:
+                    print pl.team[0].name+' missed!'                
+            elif atkid == 5:
+            #if no moves left, struggle
+                plMonPreAtkHP=pl.team[0].hp
+                rmonPreAtkHP=rmon.hp
+                print pl.team[0].name+' has no moves left!'
+                print pl.team[0].name+' struggles!'
+                if Struggle().cast(pl.team[0], rmon):
+                    print rmon.name +' took '+str(rmonPreAtkHP-rmon.hp)+' damage!'
+                    if not plMonPreAtkHP == pl.team[0].hp: 
+                        print pl.team[0].name +' took '+str(plMonPreAtkHP - pl.team[0].hp)+' damage!'        
+                else:
+                    print pl.team[0].name+' missed!'  
+            wait=raw_input('press enter...')
+            
+            #rmon atk
+            rmonAtkID=rmon.wildAttack()
+            if rmonAtkID != 5:
+            #if at least 1 move with positive PP
+                print rmon.name+' uses '+rmon.moveset[rmonAtkID].name+"!"
+                plMonPreAtkHP=pl.team[0].hp
+                rmonPreAtkHP=rmon.hp
+                if rmon.moveset[rmonAtkID].cast(rmon, pl.team[0]):
+                    print pl.team[0].name +' took '+str(plMonPreAtkHP - pl.team[0].hp)+' damage!'
+                    if not rmonPreAtkHP == rmon.hp:
+                        print rmon.name +' took '+str(rmonPreAtkHP-rmon.hp)+' damage!'
+                else:
+                    print rmon.name+' missed!'
+            elif rmonAtkID == 5:
+            #if no moves left, struggle
+                plMonPreAtkHP=pl.team[0].hp
+                rmonPreAtkHP=rmon.hp
+                print rmon.name+' has no moves left!'
+                print rmon.name+' struggles!'
+                if Struggle().cast(rmon, pl.team[0]):
+                    print pl.team[0].name +' took '+str(plMonPreAtkHP - pl.team[0].hp)+' damage!'        
+                    if not rmonPreAtkHP == rmon.hp: 
+                        print rmon.name +' took '+str(rmonPreAtkHP-rmon.hp)+' damage!'
+                else:
+                    print rmon.name+' missed!'  
+            wait=raw_input('press enter...')
+            
             #If enemy monster dies
             if rmon.hp<1:
                 clear()

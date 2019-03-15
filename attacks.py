@@ -105,13 +105,21 @@ waterEffect={
 	'Ice':'nve', 'Normal':'norm', 'Poison': 'norm',
 	'Psychic':'norm', 'Rock':'super', 'Water':'norm'
 }
+noneEffect={
+	'Bug':'norm', 'Dragon':'norm', 'Electric':'norm',
+	'Fighting':'norm', 'Fire':'norm', 'Flying':'norm',
+	'Ghost':'norm', 'Grass':'norm', 'Ground':'norm',
+	'Ice':'norm', 'Normal':'norm', 'Poison': 'norm',
+	'Psychic':'norm', 'Rock':'normr', 'Water':'norm'
+}
 effectiveness={
 	'Bug':bugEffect, 'Dragon':dragonEffect, 'Electric':electricEffect,
 	'Fighting':fightingEffect, 'Fire':fireEffect, 'Flying':flyingEffect,
 	'Ghost':ghostEffect, 'Grass':grassEffect, 'Ground':groundEffect,
 	'Ice':iceEffect, 'Normal':normalEffect, 'Poison':poisonEffect,
-	'Psychic':psychicEffect, 'Rock':rockEffect, 'Water':waterEffect
-	}
+	'Psychic':psychicEffect, 'Rock':rockEffect, 'Water':waterEffect,
+	'None':noneEffect
+}
 
 class attack:
 	def __init__(self):
@@ -120,6 +128,7 @@ class attack:
 		self.maxUsagePoints=10 #power points on serebii
 		self.baseDamage=20  #base power on serebii
 		self.specFlag=0 #special attack flag (kenetic=0, special=1, calculated=2)
+	
 	def calcDamage(self, user, target):
 		#calc critFlag
 		if rrang(0,255)<user.stats.base['speed']/2:
@@ -196,7 +205,7 @@ class attack:
 			dmg=int(((dmg+0.0)*typeMod)/10)
 			#print dmg #debug
 
-			dmg=int((dmg+0.0)*(rrang(217,255)/25))
+			dmg=int((dmg+0.0)*(rrang(217,255)/255.0))
 			#print dmg #debug			
 		elif self.specFlag==1:
 			dmg=0.0
@@ -226,8 +235,9 @@ class attack:
 			dmg=int(((dmg+0.0)*typeMod)/10)
 			#print dmg #debug
 
-			dmg=int((dmg+0.0)*(rrang(217,255)/25))
-			#print dmg #debug	
+			dmg=int((dmg+0.0)*(rrang(217,255)/255.0))
+			#print '!'
+			print dmg #debug	
 		return dmg
 
 class absorb(attack):
@@ -3367,6 +3377,28 @@ class Wrap(attack):
 			return 1
 		else:
 			return 0
+
+class Struggle(attack):
+    def __init__(self):
+		self.atkId=165
+		self.type='None'
+		self.name='Struggle'
+		self.remainingUsagePoints=1
+		self.maxUsagePoints=1
+		self.baseDamage=50
+		self.accuracy=100
+		self.specflag=0
+		self.incomplete=1 #finish
+    def cast(self, user, target):
+		dmg=self.calcDamage(user, target)
+		if roll(self.accuracy):
+			target.hp-=dmg
+			user.hp-=dmg/4
+			return 1
+		else:
+			return 0
+
+
 
 attackClasses=[
 	absorb,Acid,AcidArmor,Agility,Amnesia,
