@@ -6,7 +6,7 @@ from menus import pMenu
 
 def save(pl):
     if os.path.exists('saves/'+pl.name):
-        pass
+        pass #add overwrite check
     fullp='saves/'+pl.name
     with open(fullp, 'w+') as f:
        f.write(pickle.dumps(pl))   

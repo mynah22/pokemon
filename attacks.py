@@ -1290,14 +1290,13 @@ class Guillotine(attack):
 class Gust(attack):
     def __init__(self):
 		self.atkId=55
-		self.type='Normal'
+		self.type='Flying'
 		self.name='Gust'
 		self.remainingUsagePoints=35
 		self.maxUsagePoints=35
-		self.baseDamage=35
-		self.accuracy=95
+		self.baseDamage=40
+		self.accuracy=100
 		self.specflag=0
-		self.incomplete=1 #finish
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1462,13 +1461,12 @@ class Hyperfang(attack):
     def __init__(self):
 		self.atkId=64
 		self.type='Normal'
-		self.name='Hyperfang'
-		self.remainingUsagePoints=35
-		self.maxUsagePoints=35
-		self.baseDamage=35
-		self.accuracy=95
+		self.name='Hyper Fang'
+		self.remainingUsagePoints=15
+		self.maxUsagePoints=15
+		self.baseDamage=80
+		self.accuracy=90
 		self.specflag=0
-		self.incomplete=1 #finish
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2868,17 +2866,16 @@ class Superfang(attack):
     def __init__(self):
 		self.atkId=138
 		self.type='Normal'
-		self.name='Superfang'
-		self.remainingUsagePoints=35
-		self.maxUsagePoints=35
-		self.baseDamage=35
-		self.accuracy=95
+		self.name='Super Fang'
+		self.remainingUsagePoints=10
+		self.maxUsagePoints=10
+		self.baseDamage=1
+		self.accuracy=90
 		self.specflag=0
-		self.incomplete=1 #finish
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
-			target.hp-=dmg
+			target.hp=target.hp/2
 			self.remainingUsagePoints-=1
 			return 1
 		else:
@@ -2969,7 +2966,6 @@ class Tackle(attack):
 		self.baseDamage=35
 		self.accuracy=95
 		self.specflag=0
-		self.incomplete=1 #finish
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -3057,7 +3053,7 @@ class Thrash(attack):
 class Thunder(attack):
     def __init__(self):
 		self.atkId=148
-		self.type='Normal'
+		self.type='Electric'
 		self.name='Thunder'
 		self.remainingUsagePoints=35
 		self.maxUsagePoints=35
@@ -3306,10 +3302,10 @@ class Whirlwind(attack):
 		self.atkId=161
 		self.type='Normal'
 		self.name='Whirlwind'
-		self.remainingUsagePoints=35
-		self.maxUsagePoints=35
-		self.baseDamage=35
-		self.accuracy=95
+		self.remainingUsagePoints=20
+		self.maxUsagePoints=20
+		self.baseDamage=0
+		self.accuracy=85
 		self.specflag=0
 		self.incomplete=1 #finish
     def cast(self, user, target):
@@ -3323,14 +3319,13 @@ class Whirlwind(attack):
 class WingAttack(attack):
     def __init__(self):
 		self.atkId=162
-		self.type='Normal'
+		self.type='Flying'
 		self.name='WingAttack'
 		self.remainingUsagePoints=35
 		self.maxUsagePoints=35
 		self.baseDamage=35
-		self.accuracy=95
+		self.accuracy=100
 		self.specflag=0
-		self.incomplete=1 #finish
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):

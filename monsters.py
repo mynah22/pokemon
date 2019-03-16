@@ -101,9 +101,9 @@ class bulbasaur(mon):
         self.evlvl=16
         self.types=['Grass','Poison']
         self.moveladder={
-        -1:[52,143], 7:[72],13:[158],20:[93],
-        27:[101], 34:[53], 41:[121], 48:[126]
-        }
+            -1:[52,143], 7:[72],13:[158],20:[93],
+            27:[101], 34:[53], 41:[121], 48:[126]
+            }
         self.wildMovesetFill()
 
 class ivysaur(mon):
@@ -117,9 +117,9 @@ class ivysaur(mon):
         self.evlvl=32
         self.types=['Grass','Poison']
         self.moveladder={
-        -1:[52,143,72], 13:[158], 22:[93],
-        30:[101], 38:[53], 46:[121], 54:[126]
-        }
+            -1:[52,143,72], 13:[158], 22:[93],
+            30:[101], 38:[53], 46:[121], 54:[126]
+            }
         self.wildMovesetFill()
 
 
@@ -133,9 +133,9 @@ class venusaur(mon):
         self.stats.faintxp=208
         self.types=['Grass','Poison']
         self.moveladder={
-        -1:[52,143,72], 13:[158], 22:[93],
-        30:[101], 43:[53], 55:[121], 65:[126]
-        }
+            -1:[52,143,72], 13:[158], 22:[93],
+            30:[101], 43:[53], 55:[121], 65:[126]
+            }
         self.wildMovesetFill()
 
 class charmander(mon):
@@ -149,9 +149,9 @@ class charmander(mon):
         self.stats.faintxp=65
         self.types=['Fire']
         self.moveladder={
-        -1:[111,52],9:[39],15:[73],22:[100],
-        30:[120],38:[45],46:[43]
-        }
+            -1:[111,52],9:[39],15:[73],22:[100],
+            30:[120],38:[45],46:[43]
+            }
         self.wildMovesetFill()
 
 
@@ -166,9 +166,9 @@ class charmeleon(mon):
         self.stats.faintxp=142
         self.types=['Fire']
         self.moveladder={
-        -1:[111,52,39],15:[73],24:[100],
-        33:[120],42:[45],56:[43]
-        }
+            -1:[111,52,39],15:[73],24:[100],
+            33:[120],42:[45],56:[43]
+            }
         self.wildMovesetFill()
 class charizard(mon):
     def __init__(self, lvl=5):
@@ -180,9 +180,9 @@ class charizard(mon):
         self.stats.faintxp=209
         self.types=['Fire', 'Flying']
         self.moveladder={
-        -1:[111,52,39],15:[73],24:[100],
-        36:[120],46:[45],55:[43]
-        }
+            -1:[111,52,39],15:[73],24:[100],
+            36:[120],46:[45],55:[43]
+            }
         self.wildMovesetFill()
 class squirtle(mon):
     def __init__(self, lvl=5):
@@ -195,9 +195,9 @@ class squirtle(mon):
         self.stats.faintxp=66
         self.types=['Water']        
         self.moveladder={
-        -1:[143,144],8:[15],15:[160],22:[10],
-        28:[163],35:[117],42:[62]
-        }
+            -1:[143,144],8:[15],15:[160],22:[10],
+            28:[163],35:[117],42:[62]
+            }
         self.wildMovesetFill()
 
 class wartortle(mon):
@@ -211,9 +211,9 @@ class wartortle(mon):
         self.stats.faintxp=143
         self.types=['Water']        
         self.moveladder={
-        -1:[143,144,15],15:[160],24:[10],
-        31:[163],39:[117],47:[62]
-        }
+            -1:[143,144,15],15:[160],24:[10],
+            31:[163],39:[117],47:[62]
+            }
         self.wildMovesetFill()
 class blastoise(mon):
     def __init__(self, lvl=5):
@@ -225,9 +225,9 @@ class blastoise(mon):
         self.stats.faintxp=210
         self.types=['Water']        
         self.moveladder={
-        -1:[143,144,15,160],24:[10],
-        31:[163],42:[117],52:[62]
-        }
+            -1:[143,144,15,160],24:[10],
+            31:[163],42:[117],52:[62]
+            }
         self.wildMovesetFill()
 class caterpie(mon):
     def __init__(self, lvl=5):
@@ -302,7 +302,11 @@ class pidgey(mon):
         self.evolvable=1
         self.evlvl=18
         self.stats.faintxp=55
-        self.moveladder={-1:[143]}
+        self.types=['Normal', 'Flying']        
+        self.moveladder={
+            -1:[55], 5:[110], 12:[99], 19:[161],
+            28:[162], 36:[4], 44:[85]
+            }
         self.wildMovesetFill()
 
 class pidgeotto(mon):
@@ -314,7 +318,11 @@ class pidgeotto(mon):
         self.evolvable=1
         self.evlvl=36     
         self.stats.faintxp=113
-        self.moveladder={-1:[143]}
+        self.types=['Normal', 'Flying']
+        self.moveladder={
+            -1:[55, 110], 5:[110], 12:[99], 21:[161],
+            31:[162], 40:[4], 49:[85]
+            }
         self.wildMovesetFill()
 class pidgeot(mon):
     def __init__(self, lvl=5):
@@ -324,7 +332,11 @@ class pidgeot(mon):
         self.xprate=2
         self.evolvable=0
         self.stats.faintxp=172
-        self.moveladder={-1:[143]}
+        self.types=['Normal', 'Flying']
+        self.moveladder={
+            -1:[55, 110, 99], 5:[110], 12:[99], 21:[161],
+            31:[162], 44:[4], 54:[85]
+            }
         self.wildMovesetFill()
 class rattata(mon):
     def __init__(self, lvl=5):
@@ -335,7 +347,9 @@ class rattata(mon):
         self.evolvable=1
         self.evlvl=20
         self.stats.faintxp=57
-        self.moveladder={-1:[143]}
+        self.moveladder={
+            -1:[143, 144], 7:[99], 14:[64], 23:[48], 34:[138]
+            }
         self.wildMovesetFill()
 class raticate(mon):
     def __init__(self, lvl=5):
@@ -345,7 +359,9 @@ class raticate(mon):
         self.xprate=3
         self.evolvable=0
         self.stats.faintxp=116
-        self.moveladder={-1:[143]}
+        self.moveladder={
+            -1:[143, 144, 99], 7:[99], 14:[64], 27:[48], 41:[138]
+            }
         self.wildMovesetFill()
 class spearow(mon):
     def __init__(self, lvl=5):
@@ -356,7 +372,11 @@ class spearow(mon):
         self.evolvable=1
         self.evlvl=20
         self.stats.faintxp=58
-        self.moveladder={-1:[143]}
+        self.types=['Normal', 'Flying']
+        self.moveladder={
+            -1:[89, 52], 9:[72], 15:[49], 22:[85], 
+            29:[36], 36:[4]
+            }
         self.wildMovesetFill()
 class fearow(mon):
     def __init__(self, lvl=5):
@@ -365,8 +385,13 @@ class fearow(mon):
         self.pokedexid=22
         self.xprate=3
         self.evolvable=0
+        self.evlvl=20
         self.stats.faintxp=162
-        self.moveladder={-1:[143]}
+        self.types=['Normal', 'Flying']
+        self.moveladder={
+            -1:[89, 52, 72], 9:[72], 15:[49], 22:[85], 
+            29:[36], 36:[4]
+            }
         self.wildMovesetFill()
 class ekans(mon):
     def __init__(self, lvl=5):
