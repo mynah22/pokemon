@@ -47,6 +47,9 @@ def hunt(pl):
     encfin=False #encounter finished flag set to untrue
     if pl.dex.icn[rmon.pokedexid][0]<1:
         pl.dex.icn[rmon.pokedexid][0]=1 #set encountered flag in dex for wild monster
+    for mon in [rmon, pl.team[0]]:
+        mon.stats.atkstats=mon.stats.stats
+        #set atkstats to nonmodified stats
     while not encfin:
         clear()
         #monster appears
@@ -62,62 +65,95 @@ def hunt(pl):
         
         #user selection = attack
         if inp=='attack':
-            #pl.team[0].attack(rmon)
-            clear()
-            #player atk
+            clear()  
+            #
+            #move select phase
             atkid=atkMenu(pl.team[0])
-            if atkid != 5:
+            rmonAtkID=rmon.wildAttack()
+            #first attacker based on move speed priority and atkstat speed
+            if pl.team[0].moveset[atkid].speedPriority == rmon.moveset[rmonAtkID].speedPriority:
+                if pl.team[0].stats.atkstats['speed'] > rmon.stats.atkstats['speed']:
+                    firstAttacker=pl.team[0]
+                elif pl.team[0].stats.atkstats['speed'] < rmon.stats.atkstats['speed']:
+                    firstAttacker=rmon
+                elif pl.team[0].stats.atkstats['speed'] == rmon.stats.atkstats['speed']:
+                    firstAttacker=[rmon,pl.team[0]][rrang(2)]
+            elif pl.team[0].moveset[atkid].speedPriority > rmon.moveset[rmonAtkID].speedPriority:
+                firstAttacker=pl.team[0]
+            elif pl.team[0].moveset[atkid].speedPriority < rmon.moveset[rmonAtkID].speedPriority:
+                firstAttacker=rmon
+            #second attacker and moveid by reference
+            if firstAttacker == pl.team[0]:
+                firstMoveID = atkid
+                secondAttacker = rmon
+                secondMoveID = rmonAtkID
+            elif firstAttacker == rmon:
+                firstMoveID = rmonAtkID
+                secondAttacker = pl.team[0]
+                secondMoveID = atkid
+            #first atk                        
+            if firstMoveID != 5:
             #if at least 1 move with positive PP
-                print pl.team[0].name+' uses '+pl.team[0].moveset[atkid].name+"!"
-                plMonPreAtkHP=pl.team[0].hp
-                rmonPreAtkHP=rmon.hp
-                if pl.team[0].moveset[atkid].cast(pl.team[0], rmon):
-                    print rmon.name +' took '+str(rmonPreAtkHP-rmon.hp)+' damage!'
-                    if not plMonPreAtkHP == pl.team[0].hp: 
-                        print pl.team[0].name +' took '+str(plMonPreAtkHP - pl.team[0].hp)+' damage!'
+                print firstAttacker.name+' uses '+firstAttacker.moveset[firstMoveID].name+"!"
+                firstPreAtkHP=firstAttacker.hp
+                secondPreAtkHP=secondAttacker.hp
+                if firstAttacker.moveset[firstMoveID].cast(firstAttacker, secondAttacker):
+                    print secondAttacker.name +' took '+str(secondPreAtkHP-secondAttacker.hp)+' damage!'
+                    if not firstPreAtkHP == firstAttacker.hp: 
+                        print firstAttacker.name +' took '+str(firstPreAtkHP - firstAttacker.hp)+' damage!'
                 else:
-                    print pl.team[0].name+' missed!'                
+                    print firstAttacker.name+' missed!'                
             elif atkid == 5:
             #if no moves left, struggle
-                plMonPreAtkHP=pl.team[0].hp
-                rmonPreAtkHP=rmon.hp
-                print pl.team[0].name+' has no moves left!'
-                print pl.team[0].name+' struggles!'
-                if Struggle().cast(pl.team[0], rmon):
-                    print rmon.name +' took '+str(rmonPreAtkHP-rmon.hp)+' damage!'
-                    if not plMonPreAtkHP == pl.team[0].hp: 
-                        print pl.team[0].name +' took '+str(plMonPreAtkHP - pl.team[0].hp)+' damage!'        
+                firstPreAtkHP=firstAttacker.hp
+                secondPreAtkHP=secondAttacker.hp
+                print firstAttacker.name+' has no moves left!'
+                print firstAttacker.name+' struggles!'
+                if Struggle().cast(firstAttacker, secondAttacker):
+                    print secondAttacker.name +' took '+str(secondPreAtkHP-secondAttacker.hp)+' damage!'
+                    if not firstPreAtkHP == firstAttacker.hp: 
+                        print firstAttacker.name +' took '+str(firstPreAtkHP - firstAttacker.hp)+' damage!'        
                 else:
-                    print pl.team[0].name+' missed!'  
+                    print firstAttacker.name+' missed!'  
             wait=raw_input('press enter...')
-            
-            #rmon atk
-            rmonAtkID=rmon.wildAttack()
-            if rmonAtkID != 5:
+            ##
+            ##
+            #second atk
+            ##
+            ##
+            if secondMoveID != 5:
             #if at least 1 move with positive PP
-                print rmon.name+' uses '+rmon.moveset[rmonAtkID].name+"!"
-                plMonPreAtkHP=pl.team[0].hp
-                rmonPreAtkHP=rmon.hp
-                if rmon.moveset[rmonAtkID].cast(rmon, pl.team[0]):
-                    print pl.team[0].name +' took '+str(plMonPreAtkHP - pl.team[0].hp)+' damage!'
-                    if not rmonPreAtkHP == rmon.hp:
-                        print rmon.name +' took '+str(rmonPreAtkHP-rmon.hp)+' damage!'
+                print secondAttacker.name+' uses '+secondAttacker.moveset[secondMoveID].name+"!"
+                secondPreAtkHP=secondAttacker.hp
+                firstPreAtkHP=firstAttacker.hp
+                if secondAttacker.moveset[secondMoveID].cast(secondAttacker, firstAttacker):
+                    print firstAttacker.name +' took '+str(firstPreAtkHP-firstAttacker.hp)+' damage!'
+                    if not secondPreAtkHP == secondAttacker.hp: 
+                        print secondAttacker.name +' took '+str(secondPreAtkHP - secondAttacker.hp)+' damage!'
                 else:
-                    print rmon.name+' missed!'
-            elif rmonAtkID == 5:
+                    print secondAttacker.name+' missed!'                
+            elif atkid == 5:
             #if no moves left, struggle
-                plMonPreAtkHP=pl.team[0].hp
-                rmonPreAtkHP=rmon.hp
-                print rmon.name+' has no moves left!'
-                print rmon.name+' struggles!'
-                if Struggle().cast(rmon, pl.team[0]):
-                    print pl.team[0].name +' took '+str(plMonPreAtkHP - pl.team[0].hp)+' damage!'        
-                    if not rmonPreAtkHP == rmon.hp: 
-                        print rmon.name +' took '+str(rmonPreAtkHP-rmon.hp)+' damage!'
+                secondPreAtkHP=secondAttacker.hp
+                firstPreAtkHP=firstAttacker.hp
+                print secondAttacker.name+' has no moves left!'
+                print secondAttacker.name+' struggles!'
+                if Struggle().cast(secondAttacker, firstAttacker):
+                    print firstAttacker.name +' took '+str(firstPreAtkHP-firstAttacker.hp)+' damage!'
+                    if not secondPreAtkHP == secondAttacker.hp: 
+                        print secondAttacker.name +' took '+str(secondPreAtkHP - secondAttacker.hp)+' damage!'        
                 else:
-                    print rmon.name+' missed!'  
+                    print secondAttacker.name+' missed!'  
             wait=raw_input('press enter...')
             
+ 
+
+
+            ##
+            ##
+            ##Attacks over
+            ##
+
             #If enemy monster dies
             if rmon.hp<1:
                 clear()
