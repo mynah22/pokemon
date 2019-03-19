@@ -1,0 +1,24 @@
+Bug ID 0001:
+	3/18/2019
+	modules:
+		zones.py
+		hunt.py
+	description:
+		randomrange does not function with identical
+		high and low range values. Several 
+		pokemon-encounter-tuples (items in the zone's
+		pokelist) have the same high and low level 
+		limits. Hunt.py	uses randomrange (as rrang) 
+		to determine wild pokemon level, with the 
+		range limits in a pokemon-encounter-tuple,
+		and therefore fails.
+	to reproduce:
+		navigate to viridian forest and hunt
+
+	Completed:
+		3/18/2019
+		Solution:
+			check if level limits are equal at 
+			poke spawn. If so, do not call rrang,
+			use low level limit.
+
