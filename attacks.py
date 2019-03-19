@@ -132,7 +132,7 @@ class attack:
 	
 	def calcDamage(self, user, target):
 		#calc critFlag
-		if rrang(0,255)<user.stats.stats['speed']/2:
+		if rrang(0,255)<user.stats.base['speed']/2:
 			lvlWithCritMod=user.level*2
 		else:
 			lvlWithCritMod=user.level
@@ -181,64 +181,27 @@ class attack:
 		if self.specflag==0:
 			dmg=0.0
 			dmg=int(2*lvlWithCritMod)
-			#print dmg #debug
 			dmg=int(dmg/5.0+2)
-			#print dmg #debug
-
-			dmg=int((dmg+0.0)*user.stats.stats['atk'])
-			#print dmg #debug
-			
+			dmg=int((dmg+0.0)*user.stats.stats['atk']*user.statStageCoefficient(user.stats.combatStages['atk']))
 			dmg=int((dmg+0.0)*self.baseDamage)
-			#print dmg #debug
-			
-			dmg=int((dmg+0.0)/target.stats.stats['def'])
-			#print dmg #debug
-			
+			dmg=int((dmg+0.0)/target.stats.stats['def']*target.statStageCoefficient(target.stats.combatStages['def']))
 			dmg=int(dmg/50.0)
-			#print dmg #debug
-			
 			dmg=int(dmg+2.0)
-			#print dmg #debug
-			
 			dmg=int((dmg+0.0)*sameTypeMod)
-			#print dmg #debug
-			
 			dmg=int(((dmg+0.0)*typeMod)/10)
-			#print dmg #debug
-
-			dmg=int((dmg+0.0)*(rrang(217,255)/255.0))
-			#print dmg #debug			
+			dmg=int((dmg+0.0)*(rrang(217,255)/255.0))		
 		elif self.specFlag==1:
 			dmg=0.0
 			dmg=int(2*lvlWithCritMod)
-			#print dmg #debug
 			dmg=int(dmg/5.0+2)
-			#print dmg #debug
-
-			dmg=int((dmg+0.0)*user.stats.stats['atk'])
-			#print dmg #debug
-			
+			dmg=int((dmg+0.0)*user.stats.stats['spAtk']*user.statStageCoefficient(user.stats.combatStages['spAtk']))
 			dmg=int((dmg+0.0)*self.baseDamage)
-			#print dmg #debug
-			
-			dmg=int((dmg+0.0)/target.stats.stats['def'])
-			#print dmg #debug
-			
+			dmg=int((dmg+0.0)/target.stats.stats['spDef']*target.statStageCoefficient(target.stats.combatStages['spDef']))
 			dmg=int(dmg/50.0)
-			#print dmg #debug
-			
 			dmg=int(dmg+2.0)
-			#print dmg #debug
-			
 			dmg=int((dmg+0.0)*sameTypeMod)
-			#print dmg #debug
-			
 			dmg=int(((dmg+0.0)*typeMod)/10)
-			#print dmg #debug
-
 			dmg=int((dmg+0.0)*(rrang(217,255)/255.0))
-			#print '!'
-			print dmg #debug	
 		return dmg
 
 class absorb(attack):
@@ -1299,9 +1262,11 @@ class Growl(attack):
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
-			return 1
+			if user.stats.combatStages['atk'] < 6:
+				user.stats.combatStages['atk'] += 1
+				return 1
+			else:
+				return 0
 		else:
 			return 0
 class Growth(attack):
@@ -3126,19 +3091,21 @@ class Tailwhip(attack):
 		self.atkId=144
 		self.type='Normal'
 		self.name='Tailwhip'
-		self.remainingUsagePoints=35
-		self.maxUsagePoints=35
-		self.baseDamage=35
-		self.accuracy=95
+		self.remainingUsagePoints=30
+		self.maxUsagePoints=30
+		self.baseDamage=0
+		self.accuracy=100
 		self.specflag=0
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
-			return 1
+			if target.stats.combatStages['def'] > -6:
+				target.stats.combatStages['def'] -= 1
+				return 1
+			else:
+				return 0
 		else:
 			return 0
 class Takedown(attack):

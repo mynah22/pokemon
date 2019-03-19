@@ -27,7 +27,9 @@ class statholder(object):
 		self.combatStages={
 			'hp':0,'speed':0, 
 			'atk':0,'def':0,
-			'spAtk':0,'spDef':0,}
+			'spAtk':0,'spDef':0,
+			'acc':0
+			}
 		self.faintxp=0	
 		
 
