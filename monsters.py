@@ -32,6 +32,33 @@ class mon(object):
                 self.stats.calchp(self.level)
             else:
                 self.stats.calcstat(st,self.level)
+    def statStageCoefficient(self, statStage):
+        if statStage == -6:
+            return 0.25
+        if statStage == -5:
+            return 0.28
+        if statStage == -4:
+            return 0.33
+        if statStage == -3:
+            return 0.40
+        if statStage == -2:
+            return 0.50
+        if statStage == -1:
+            return 0.66
+        if statStage == 0:
+            return 1
+        if statStage == 1:
+            return 1.5
+        if statStage == 2:
+            return 2
+        if statStage == 3:
+            return 2.5
+        if statStage == 4:
+            return 3
+        if statStage == 5:
+            return 3.5
+        if statStage == 6:
+            return 4
 
 
     def attack(self, target):

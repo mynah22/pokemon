@@ -6,30 +6,26 @@ class statholder(object):
 			'spAtk', 'def', 'spDef'
 			]	
 		self.ev={
-			'hp':0,'speed':0 
+			'hp':0,'speed':0, 
 			'atk':0,'def':0,
 			'spAtk':0,'spDef':0,}
 		self.iv={
-			'hp':0,'speed':0 
+			'hp':0,'speed':0, 
 			'atk':0,'def':0,
 			'spAtk':0,'spDef':0,	
 			}
 		self.base={
-			'hp':0,'speed':0 
+			'hp':0,'speed':0, 
 			'atk':0,'def':0,
 			'spAtk':0,'spDef':0,
 			}
 		self.stats={
-			'hp':0,'speed':0 
+			'hp':0,'speed':0, 
 			'atk':0,'def':0,
 			'spAtk':0,'spDef':0,
 			}
-		self.atkstats={
-			'hp':0,'speed':0 
-			'atk':0,'def':0,
-			'spAtk':0,'spDef':0,}
 		self.combatStages={
-			'hp':0,'speed':0 
+			'hp':0,'speed':0, 
 			'atk':0,'def':0,
 			'spAtk':0,'spDef':0,}
 		self.faintxp=0	

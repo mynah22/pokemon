@@ -51,8 +51,12 @@ def hunt(pl):
     if pl.dex.icn[rmon.pokedexid][0]<1:
         pl.dex.icn[rmon.pokedexid][0]=1 #set encountered flag in dex for wild monster
     for mon in [rmon, pl.team[0]]:
-        mon.stats.atkstats=mon.stats.stats
-        #set atkstats to nonmodified stats
+        #reset comnbat stat stages
+        mon.stats.combatStages={
+            'hp':0,'speed':0, 
+            'atk':0,'def':0,
+            'spAtk':0,'spDef':0,
+        }
     while not encfin:
         clear()
         #monster appears
@@ -74,11 +78,14 @@ def hunt(pl):
             rmonAtkID=rmon.wildAttack()
             #select first attacker based on move speed priority and atkstat speed
             if pl.team[0].moveset[atkid].speedPriority == rmon.moveset[rmonAtkID].speedPriority:
-                if pl.team[0].stats.atkstats['speed'] > rmon.stats.atkstats['speed']:
+                if (pl.team[0].stats.stats['speed'] * pl.team[0].statStageCoefficient(pl.team[0].stats.combatStages['speed']) 
+                > rmon.stats.stats['speed'] * rmon.statStageCoefficient(rmon.stats.combatStages['speed'])):
                     firstAttacker=pl.team[0]
-                elif pl.team[0].stats.atkstats['speed'] < rmon.stats.atkstats['speed']:
+                elif (pl.team[0].stats.stats['speed'] * pl.team[0].statStageCoefficient(pl.team[0].stats.combatStages['speed']) 
+                < rmon.stats.stats['speed'] * rmon.statStageCoefficient(rmon.stats.combatStages['speed'])):    
                     firstAttacker=rmon
-                elif pl.team[0].stats.atkstats['speed'] == rmon.stats.atkstats['speed']:
+                elif (pl.team[0].stats.stats['speed'] * pl.team[0].statStageCoefficient(pl.team[0].stats.combatStages['speed']) 
+                == rmon.stats.stats['speed'] * rmon.statStageCoefficient(rmon.stats.combatStages['speed'])):
                     firstAttacker=[rmon,pl.team[0]][rrang(2)]
             elif pl.team[0].moveset[atkid].speedPriority > rmon.moveset[rmonAtkID].speedPriority:
                 firstAttacker=pl.team[0]

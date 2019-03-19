@@ -132,7 +132,7 @@ class attack:
 	
 	def calcDamage(self, user, target):
 		#calc critFlag
-		if rrang(0,255)<user.stats.atkstats['speed']/2:
+		if rrang(0,255)<user.stats.stats['speed']/2:
 			lvlWithCritMod=user.level*2
 		else:
 			lvlWithCritMod=user.level
@@ -185,13 +185,13 @@ class attack:
 			dmg=int(dmg/5.0+2)
 			#print dmg #debug
 
-			dmg=int((dmg+0.0)*user.stats.atkstats['atk'])
+			dmg=int((dmg+0.0)*user.stats.stats['atk'])
 			#print dmg #debug
 			
 			dmg=int((dmg+0.0)*self.baseDamage)
 			#print dmg #debug
 			
-			dmg=int((dmg+0.0)/target.stats.atkstats['def'])
+			dmg=int((dmg+0.0)/target.stats.stats['def'])
 			#print dmg #debug
 			
 			dmg=int(dmg/50.0)
@@ -215,13 +215,13 @@ class attack:
 			dmg=int(dmg/5.0+2)
 			#print dmg #debug
 
-			dmg=int((dmg+0.0)*user.stats.atkstats['atk'])
+			dmg=int((dmg+0.0)*user.stats.stats['atk'])
 			#print dmg #debug
 			
 			dmg=int((dmg+0.0)*self.baseDamage)
 			#print dmg #debug
 			
-			dmg=int((dmg+0.0)/target.stats.atkstats['def'])
+			dmg=int((dmg+0.0)/target.stats.stats['def'])
 			#print dmg #debug
 			
 			dmg=int(dmg/50.0)
