@@ -42,7 +42,11 @@ def hunt(pl):
         return
     selectedTup=pokeSelect(zone.pokelist)
     #tup[]: 0-id, 1-encounter chance, 2-low lvl, 3-high lvl
-    rmon=pokeclasses[selectedTup[0]-1](lvl=rrang(selectedTup[2],selectedTup[3]))      
+    #select wild pokemon
+    if selectedTup[2] == selectedTup[3]:
+        rmon=pokeclasses[selectedTup[0]-1](lvl=selectedTup[3])
+    else:
+        rmon=pokeclasses[selectedTup[0]-1](lvl=rrang(selectedTup[2],selectedTup[3]))      
     print 2
     encfin=False #encounter finished flag set to untrue
     if pl.dex.icn[rmon.pokedexid][0]<1:
