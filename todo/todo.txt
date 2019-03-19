@@ -1,0 +1,5 @@
+stat stages
+	there is a -6 -> +6 scale for in-combat stat modification.
+	The levels are refered to as the stat stages, and a simple 
+	map between the stat stage and calculation coefficient is
+	all that is needed to correctly compute attack mechanics.
