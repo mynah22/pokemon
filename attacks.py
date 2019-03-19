@@ -105,13 +105,21 @@ waterEffect={
 	'Ice':'nve', 'Normal':'norm', 'Poison': 'norm',
 	'Psychic':'norm', 'Rock':'super', 'Water':'norm'
 }
+noneEffect={
+	'Bug':'norm', 'Dragon':'norm', 'Electric':'norm',
+	'Fighting':'norm', 'Fire':'norm', 'Flying':'norm',
+	'Ghost':'norm', 'Grass':'norm', 'Ground':'norm',
+	'Ice':'norm', 'Normal':'norm', 'Poison': 'norm',
+	'Psychic':'norm', 'Rock':'normr', 'Water':'norm'
+}
 effectiveness={
 	'Bug':bugEffect, 'Dragon':dragonEffect, 'Electric':electricEffect,
 	'Fighting':fightingEffect, 'Fire':fireEffect, 'Flying':flyingEffect,
 	'Ghost':ghostEffect, 'Grass':grassEffect, 'Ground':groundEffect,
 	'Ice':iceEffect, 'Normal':normalEffect, 'Poison':poisonEffect,
-	'Psychic':psychicEffect, 'Rock':rockEffect, 'Water':waterEffect
-	}
+	'Psychic':psychicEffect, 'Rock':rockEffect, 'Water':waterEffect,
+	'None':noneEffect
+}
 
 class attack:
 	def __init__(self):
@@ -120,6 +128,8 @@ class attack:
 		self.maxUsagePoints=10 #power points on serebii
 		self.baseDamage=20  #base power on serebii
 		self.specFlag=0 #special attack flag (kenetic=0, special=1, calculated=2)
+		self.speedPriority=0
+	
 	def calcDamage(self, user, target):
 		#calc critFlag
 		if rrang(0,255)<user.stats.base['speed']/2:
@@ -196,7 +206,7 @@ class attack:
 			dmg=int(((dmg+0.0)*typeMod)/10)
 			#print dmg #debug
 
-			dmg=int((dmg+0.0)*(rrang(217,255)/25))
+			dmg=int((dmg+0.0)*(rrang(217,255)/255.0))
 			#print dmg #debug			
 		elif self.specFlag==1:
 			dmg=0.0
@@ -226,8 +236,9 @@ class attack:
 			dmg=int(((dmg+0.0)*typeMod)/10)
 			#print dmg #debug
 
-			dmg=int((dmg+0.0)*(rrang(217,255)/25))
-			#print dmg #debug	
+			dmg=int((dmg+0.0)*(rrang(217,255)/255.0))
+			#print '!'
+			print dmg #debug	
 		return dmg
 
 class absorb(attack):
@@ -241,6 +252,7 @@ class absorb(attack):
 		self.baseDamage=20
 		self.specFlag=0
 		self.accuracy=100
+		self.speedPriority=0
 	def cast(self, user, target):
 		dmg = self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -262,6 +274,7 @@ class Acid(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
 	def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -281,6 +294,7 @@ class AcidArmor(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -300,6 +314,7 @@ class Agility(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -319,6 +334,7 @@ class Amnesia(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -338,6 +354,7 @@ class Aurrorabeam(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -357,6 +374,7 @@ class Barrage(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -376,6 +394,7 @@ class Barrier(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -395,6 +414,7 @@ class Bide(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -414,6 +434,7 @@ class Bind(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -433,6 +454,7 @@ class Bite(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -452,6 +474,7 @@ class Blizzard(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -471,6 +494,7 @@ class Bodyslam(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -490,6 +514,7 @@ class BoneClub(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -509,6 +534,7 @@ class Bonemerang(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -528,6 +554,7 @@ class Bubble(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -547,6 +574,7 @@ class Bubblebeam(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -566,6 +594,7 @@ class Clamp(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -585,6 +614,7 @@ class Cometpunch(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -604,6 +634,7 @@ class Confuseray(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -623,6 +654,7 @@ class Confusion(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -642,6 +674,7 @@ class Constrict(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -661,6 +694,7 @@ class Conversion(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -679,7 +713,9 @@ class Counter(attack):
 		self.baseDamage=35
 		self.accuracy=95
 		self.specflag=0
+		self.speedPriority=-1
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -699,6 +735,7 @@ class Crabhammer(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -718,6 +755,7 @@ class Cut(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -737,6 +775,7 @@ class DefenseCurl(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -756,6 +795,7 @@ class Dig(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -775,6 +815,7 @@ class Disable(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -794,6 +835,7 @@ class DizzyPunch(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -813,6 +855,7 @@ class DoubleEdge(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -832,6 +875,7 @@ class Doublekick(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -851,6 +895,7 @@ class Doubleslap(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -870,6 +915,7 @@ class Doubleteam(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -889,6 +935,7 @@ class DragonRage(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -908,6 +955,7 @@ class DreamEater(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -927,6 +975,7 @@ class DrillPeck(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -946,6 +995,7 @@ class EarthQuake(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -965,6 +1015,7 @@ class EggBomb(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -984,6 +1035,7 @@ class Ember(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1003,6 +1055,7 @@ class Explosion(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1022,6 +1075,7 @@ class Fireblast(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1041,6 +1095,7 @@ class Firepunch(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1060,6 +1115,7 @@ class Firespin(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1079,6 +1135,7 @@ class Fissure(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1098,6 +1155,7 @@ class Flamethrower(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1117,6 +1175,7 @@ class Flash(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1136,6 +1195,7 @@ class Fly(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1155,6 +1215,7 @@ class FocusEnergy(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1174,6 +1235,7 @@ class FuryAttack(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1193,6 +1255,7 @@ class FurySwipes(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1212,6 +1275,7 @@ class Glare(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1231,6 +1295,7 @@ class Growl(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1250,6 +1315,7 @@ class Growth(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1269,6 +1335,7 @@ class Guillotine(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1280,14 +1347,14 @@ class Guillotine(attack):
 class Gust(attack):
     def __init__(self):
 		self.atkId=55
-		self.type='Normal'
+		self.type='Flying'
 		self.name='Gust'
 		self.remainingUsagePoints=35
 		self.maxUsagePoints=35
-		self.baseDamage=35
-		self.accuracy=95
+		self.baseDamage=40
+		self.accuracy=100
 		self.specflag=0
-		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1307,6 +1374,7 @@ class Harden(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1326,6 +1394,7 @@ class Haze(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1345,6 +1414,7 @@ class HEadbutt(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1364,6 +1434,7 @@ class HiJumpKick(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1383,6 +1454,7 @@ class HornAttack(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1402,6 +1474,7 @@ class HornDrill(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1421,6 +1494,7 @@ class Hydropump(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1440,6 +1514,7 @@ class Hyperbeam(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1452,13 +1527,13 @@ class Hyperfang(attack):
     def __init__(self):
 		self.atkId=64
 		self.type='Normal'
-		self.name='Hyperfang'
-		self.remainingUsagePoints=35
-		self.maxUsagePoints=35
-		self.baseDamage=35
-		self.accuracy=95
+		self.name='Hyper Fang'
+		self.remainingUsagePoints=15
+		self.maxUsagePoints=15
+		self.baseDamage=80
+		self.accuracy=90
 		self.specflag=0
-		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1478,6 +1553,7 @@ class Hypnosis(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1497,6 +1573,7 @@ class Icebeam(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1516,6 +1593,7 @@ class Icepunch(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1535,6 +1613,7 @@ class Jumpkick(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1554,6 +1633,7 @@ class Karatechop(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1573,6 +1653,7 @@ class Kinesis(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1592,6 +1673,7 @@ class Leechlife(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1611,6 +1693,7 @@ class Leechseed(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1630,6 +1713,7 @@ class leer(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1649,6 +1733,7 @@ class Lick(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1668,6 +1753,7 @@ class Lightscreen(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1687,6 +1773,7 @@ class LovelyKiss(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1706,6 +1793,7 @@ class LowKick(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1725,6 +1813,7 @@ class Meditate(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1744,6 +1833,7 @@ class MegaDrain(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1763,6 +1853,7 @@ class Megakick(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1782,6 +1873,7 @@ class MegaPunch(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1801,6 +1893,7 @@ class Metronome(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1820,6 +1913,7 @@ class Mimic(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1839,6 +1933,7 @@ class Minimize(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1858,6 +1953,7 @@ class Mirrormove(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1877,6 +1973,7 @@ class Mist(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1896,6 +1993,7 @@ class Nightshade(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1915,6 +2013,7 @@ class Payday(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1934,6 +2033,7 @@ class PEck(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1953,6 +2053,7 @@ class PEtaldance(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1972,6 +2073,7 @@ class Pinmissile(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -1991,6 +2093,7 @@ class PoisonGas(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2010,6 +2113,7 @@ class Poisonpowder(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2029,6 +2133,7 @@ class PoisonSting(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2048,6 +2153,7 @@ class Pound(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2067,6 +2173,7 @@ class Psybeam(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2086,6 +2193,7 @@ class Psychic(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2105,6 +2213,7 @@ class Psywave(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2124,6 +2233,8 @@ class Quickattack(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
+		self.speedPriority=1
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2143,6 +2254,7 @@ class Rage(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2162,6 +2274,7 @@ class Razorleaf(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2181,6 +2294,7 @@ class Razoewind(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2200,6 +2314,7 @@ class Recover(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2219,6 +2334,7 @@ class Reflect(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2238,6 +2354,7 @@ class rest(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2257,6 +2374,7 @@ class Roar(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2276,6 +2394,7 @@ class Rockslide(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2295,6 +2414,7 @@ class Rockthrow(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2314,6 +2434,7 @@ class RollingKick(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2333,6 +2454,7 @@ class SandAttack(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2352,6 +2474,7 @@ class Scratch(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2371,6 +2494,7 @@ class Screech(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2390,6 +2514,7 @@ class SeismicToss(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2409,6 +2534,7 @@ class SelfDestruct(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2428,6 +2554,7 @@ class Sharpen(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2447,6 +2574,7 @@ class Sing(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2466,6 +2594,7 @@ class Skllbash(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2485,6 +2614,7 @@ class SkyAttack(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2504,6 +2634,7 @@ class Slam(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2523,6 +2654,7 @@ class Slash(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2542,6 +2674,7 @@ class Sleeppowder(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2561,6 +2694,7 @@ class Sludge(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2580,6 +2714,7 @@ class Smog(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2599,6 +2734,7 @@ class SmokeScreen(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2618,6 +2754,7 @@ class SoftBoiled(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2637,6 +2774,7 @@ class SolarBeam(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2656,6 +2794,7 @@ class SonicBoom(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2675,6 +2814,7 @@ class SpikeCannon(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2694,6 +2834,7 @@ class Splash(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2713,6 +2854,7 @@ class Spore(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2732,6 +2874,7 @@ class Stomp(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2751,6 +2894,7 @@ class Strength(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2770,6 +2914,7 @@ class Stringshot(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2789,6 +2934,7 @@ class Struggle(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2808,6 +2954,7 @@ class StunSpore(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2827,6 +2974,7 @@ class Submission(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2846,6 +2994,7 @@ class Substitute(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2858,17 +3007,17 @@ class Superfang(attack):
     def __init__(self):
 		self.atkId=138
 		self.type='Normal'
-		self.name='Superfang'
-		self.remainingUsagePoints=35
-		self.maxUsagePoints=35
-		self.baseDamage=35
-		self.accuracy=95
+		self.name='Super Fang'
+		self.remainingUsagePoints=10
+		self.maxUsagePoints=10
+		self.baseDamage=1
+		self.accuracy=90
 		self.specflag=0
-		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
-			target.hp-=dmg
+			target.hp=target.hp/2
 			self.remainingUsagePoints-=1
 			return 1
 		else:
@@ -2884,6 +3033,7 @@ class Supersonic(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2903,6 +3053,7 @@ class Surf(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2922,6 +3073,7 @@ class Swift(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2941,6 +3093,7 @@ class SwordsDancw(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2959,7 +3112,7 @@ class Tackle(attack):
 		self.baseDamage=35
 		self.accuracy=95
 		self.specflag=0
-		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2979,6 +3132,7 @@ class Tailwhip(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -2998,6 +3152,7 @@ class Takedown(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -3017,6 +3172,7 @@ class Teleport(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -3036,6 +3192,7 @@ class Thrash(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -3047,7 +3204,7 @@ class Thrash(attack):
 class Thunder(attack):
     def __init__(self):
 		self.atkId=148
-		self.type='Normal'
+		self.type='Electric'
 		self.name='Thunder'
 		self.remainingUsagePoints=35
 		self.maxUsagePoints=35
@@ -3055,6 +3212,7 @@ class Thunder(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -3074,6 +3232,7 @@ class Thunderbolt(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -3093,6 +3252,7 @@ class Thunderpunch(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -3112,6 +3272,7 @@ class ThunderShick(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -3131,6 +3292,7 @@ class ThunderWave(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -3150,6 +3312,7 @@ class Toxic(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -3169,6 +3332,7 @@ class Transform(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -3188,6 +3352,7 @@ class TriAttack(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -3207,6 +3372,7 @@ class Twineedle(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -3226,6 +3392,7 @@ class Vicegrip(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -3245,6 +3412,7 @@ class VineWhip(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -3264,6 +3432,7 @@ class Waterfall(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -3283,6 +3452,7 @@ class Watergun(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -3296,12 +3466,13 @@ class Whirlwind(attack):
 		self.atkId=161
 		self.type='Normal'
 		self.name='Whirlwind'
-		self.remainingUsagePoints=35
-		self.maxUsagePoints=35
-		self.baseDamage=35
-		self.accuracy=95
+		self.remainingUsagePoints=20
+		self.maxUsagePoints=20
+		self.baseDamage=0
+		self.accuracy=85
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -3313,14 +3484,14 @@ class Whirlwind(attack):
 class WingAttack(attack):
     def __init__(self):
 		self.atkId=162
-		self.type='Normal'
+		self.type='Flying'
 		self.name='WingAttack'
 		self.remainingUsagePoints=35
 		self.maxUsagePoints=35
 		self.baseDamage=35
-		self.accuracy=95
+		self.accuracy=100
 		self.specflag=0
-		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -3340,6 +3511,7 @@ class WithDraw(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -3359,6 +3531,7 @@ class Wrap(attack):
 		self.accuracy=95
 		self.specflag=0
 		self.incomplete=1 #finish
+		self.speedPriority=0
     def cast(self, user, target):
 		dmg=self.calcDamage(user, target)
 		if roll(self.accuracy):
@@ -3367,6 +3540,29 @@ class Wrap(attack):
 			return 1
 		else:
 			return 0
+
+class Struggle(attack):
+    def __init__(self):
+		self.atkId=165
+		self.type='None'
+		self.name='Struggle'
+		self.remainingUsagePoints=1
+		self.maxUsagePoints=1
+		self.baseDamage=50
+		self.accuracy=100
+		self.specflag=0
+		self.incomplete=1 #finish
+		self.speedPriority=0
+    def cast(self, user, target):
+		dmg=self.calcDamage(user, target)
+		if roll(self.accuracy):
+			target.hp-=dmg
+			user.hp-=dmg/4
+			return 1
+		else:
+			return 0
+
+
 
 attackClasses=[
 	absorb,Acid,AcidArmor,Agility,Amnesia,

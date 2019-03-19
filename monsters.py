@@ -22,12 +22,17 @@ class mon(object):
         self.moveladder={-1:143}
         for st in self.stats.statNames:
             self.stats.iv[st]=riv()
+        self.calcAllStats()
+        self.hp=int(self.stats.stats['hp'])
+        self.types=['Normal']
+   
+    def calcAllStats(self):
         for st in self.stats.statNames:
             if st=='hp':
                 self.stats.calchp(self.level)
             else:
                 self.stats.calcstat(st,self.level)
-        self.hp=int(self.stats.stats['hp'])
+
 
     def attack(self, target):
         if roll(60):
@@ -39,8 +44,15 @@ class mon(object):
             target.hp-=int(dmg)
             if target.hp<0:
                 target.hp=0
-    def wild(self, target):
-        attack(target)
+    def wildAttack(self):
+        usableAtks=[]
+        for movekey in self.moveset:
+            if self.moveset[movekey] and self.moveset[movekey].remainingUsagePoints:
+                usableAtks.append(movekey)
+        if len(usableAtks)<1:
+            return 5
+        else:
+            return usableAtks[rrang(len(usableAtks))]
     def caught(self, pl):
         print self.name+' was caught!\n\n'     
         pl.dex.icn[self.pokedexid][0]=2
@@ -89,9 +101,9 @@ class bulbasaur(mon):
         self.evlvl=16
         self.types=['Grass','Poison']
         self.moveladder={
-        -1:[52,143], 7:[72],13:[158],20:[93],
-        27:[101], 34:[53], 41:[121], 48:[126]
-        }
+            -1:[52,143], 7:[72],13:[158],20:[93],
+            27:[101], 34:[53], 41:[121], 48:[126]
+            }
         self.wildMovesetFill()
 
 class ivysaur(mon):
@@ -105,9 +117,9 @@ class ivysaur(mon):
         self.evlvl=32
         self.types=['Grass','Poison']
         self.moveladder={
-        -1:[52,143,72], 13:[158], 22:[93],
-        30:[101], 38:[53], 46:[121], 54:[126]
-        }
+            -1:[52,143,72], 13:[158], 22:[93],
+            30:[101], 38:[53], 46:[121], 54:[126]
+            }
         self.wildMovesetFill()
 
 
@@ -121,9 +133,10 @@ class venusaur(mon):
         self.stats.faintxp=208
         self.types=['Grass','Poison']
         self.moveladder={
-        -1:[52,143,72], 13:[158], 22:[93],
-        30:[101], 43:[53], 55:[121], 65:[126]
-        }
+            -1:[52,143,72], 13:[158], 22:[93],
+            30:[101], 43:[53], 55:[121], 65:[126]
+            }
+        self.wildMovesetFill()
 
 class charmander(mon):
     def __init__(self, lvl=5):
@@ -136,9 +149,10 @@ class charmander(mon):
         self.stats.faintxp=65
         self.types=['Fire']
         self.moveladder={
-        -1:[111,52],9:[39],15:[73],22:[100],
-        30:[120],38:[45],46:[43]
-        }
+            -1:[111,52],9:[39],15:[73],22:[100],
+            30:[120],38:[45],46:[43]
+            }
+        self.wildMovesetFill()
 
 
 class charmeleon(mon):
@@ -152,9 +166,10 @@ class charmeleon(mon):
         self.stats.faintxp=142
         self.types=['Fire']
         self.moveladder={
-        -1:[111,52,39],15:[73],24:[100],
-        33:[120],42:[45],56:[43]
-        }
+            -1:[111,52,39],15:[73],24:[100],
+            33:[120],42:[45],56:[43]
+            }
+        self.wildMovesetFill()
 class charizard(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -165,9 +180,10 @@ class charizard(mon):
         self.stats.faintxp=209
         self.types=['Fire', 'Flying']
         self.moveladder={
-        -1:[111,52,39],15:[73],24:[100],
-        36:[120],46:[45],55:[43]
-        }
+            -1:[111,52,39],15:[73],24:[100],
+            36:[120],46:[45],55:[43]
+            }
+        self.wildMovesetFill()
 class squirtle(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -179,9 +195,10 @@ class squirtle(mon):
         self.stats.faintxp=66
         self.types=['Water']        
         self.moveladder={
-        -1:[143,144],8:[15],15:[160],22:[10],
-        28:[163],35:[117],42:[62]
-        }
+            -1:[143,144],8:[15],15:[160],22:[10],
+            28:[163],35:[117],42:[62]
+            }
+        self.wildMovesetFill()
 
 class wartortle(mon):
     def __init__(self, lvl=5):
@@ -194,10 +211,10 @@ class wartortle(mon):
         self.stats.faintxp=143
         self.types=['Water']        
         self.moveladder={
-        -1:[143,144,15],15:[160],24:[10],
-        31:[163],39:[117],47:[62]
-        }
-
+            -1:[143,144,15],15:[160],24:[10],
+            31:[163],39:[117],47:[62]
+            }
+        self.wildMovesetFill()
 class blastoise(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -208,10 +225,10 @@ class blastoise(mon):
         self.stats.faintxp=210
         self.types=['Water']        
         self.moveladder={
-        -1:[143,144,15,160],24:[10],
-        31:[163],42:[117],52:[62]
-        }
-
+            -1:[143,144,15,160],24:[10],
+            31:[163],42:[117],52:[62]
+            }
+        self.wildMovesetFill()
 class caterpie(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,30,35,20,20,45],xpr=2)
@@ -222,7 +239,7 @@ class caterpie(mon):
         self.evlvl=7
         self.stats.faintxp=53
         self.moveladder={-1:[143,133]}
-
+        self.wildMovesetFill()
 class metapod(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -233,7 +250,7 @@ class metapod(mon):
         self.evlvl=10    
         self.stats.faintxp=72
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class butterfree(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -243,7 +260,7 @@ class butterfree(mon):
         self.evolvable=0
         self.stats.faintxp=160
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class weedle(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -254,7 +271,7 @@ class weedle(mon):
         self.evlvl=7
         self.stats.faintxp=52
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class kakuna(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -265,7 +282,7 @@ class kakuna(mon):
         self.evlvl=10
         self.stats.faintxp=71
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class beedrill(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -275,7 +292,7 @@ class beedrill(mon):
         self.evolvable=0
         self.stats.faintxp=159
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class pidgey(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -285,8 +302,12 @@ class pidgey(mon):
         self.evolvable=1
         self.evlvl=18
         self.stats.faintxp=55
-        self.moveladder={-1:[143]}
-
+        self.types=['Normal', 'Flying']        
+        self.moveladder={
+            -1:[55], 5:[110], 12:[99], 19:[161],
+            28:[162], 36:[4], 44:[85]
+            }
+        self.wildMovesetFill()
 
 class pidgeotto(mon):
     def __init__(self, lvl=5):
@@ -297,8 +318,12 @@ class pidgeotto(mon):
         self.evolvable=1
         self.evlvl=36     
         self.stats.faintxp=113
-        self.moveladder={-1:[143]}
-
+        self.types=['Normal', 'Flying']
+        self.moveladder={
+            -1:[55, 110], 5:[110], 12:[99], 21:[161],
+            31:[162], 40:[4], 49:[85]
+            }
+        self.wildMovesetFill()
 class pidgeot(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -307,8 +332,12 @@ class pidgeot(mon):
         self.xprate=2
         self.evolvable=0
         self.stats.faintxp=172
-        self.moveladder={-1:[143]}
-
+        self.types=['Normal', 'Flying']
+        self.moveladder={
+            -1:[55, 110, 99], 5:[110], 12:[99], 21:[161],
+            31:[162], 44:[4], 54:[85]
+            }
+        self.wildMovesetFill()
 class rattata(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -318,8 +347,10 @@ class rattata(mon):
         self.evolvable=1
         self.evlvl=20
         self.stats.faintxp=57
-        self.moveladder={-1:[143]}
-
+        self.moveladder={
+            -1:[143, 144], 7:[99], 14:[64], 23:[48], 34:[138]
+            }
+        self.wildMovesetFill()
 class raticate(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -328,8 +359,10 @@ class raticate(mon):
         self.xprate=3
         self.evolvable=0
         self.stats.faintxp=116
-        self.moveladder={-1:[143]}
-
+        self.moveladder={
+            -1:[143, 144, 99], 7:[99], 14:[64], 27:[48], 41:[138]
+            }
+        self.wildMovesetFill()
 class spearow(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -339,8 +372,12 @@ class spearow(mon):
         self.evolvable=1
         self.evlvl=20
         self.stats.faintxp=58
-        self.moveladder={-1:[143]}
-
+        self.types=['Normal', 'Flying']
+        self.moveladder={
+            -1:[89, 52], 9:[72], 15:[49], 22:[85], 
+            29:[36], 36:[4]
+            }
+        self.wildMovesetFill()
 class fearow(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -348,9 +385,14 @@ class fearow(mon):
         self.pokedexid=22
         self.xprate=3
         self.evolvable=0
+        self.evlvl=20
         self.stats.faintxp=162
-        self.moveladder={-1:[143]}
-
+        self.types=['Normal', 'Flying']
+        self.moveladder={
+            -1:[89, 52, 72], 9:[72], 15:[49], 22:[85], 
+            29:[36], 36:[4]
+            }
+        self.wildMovesetFill()
 class ekans(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -361,7 +403,7 @@ class ekans(mon):
         self.evlvl=22
         self.stats.faintxp=62
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class arbok(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -371,7 +413,7 @@ class arbok(mon):
         self.evolvable=0
         self.stats.faintxp=147
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class pikachu(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -382,7 +424,7 @@ class pikachu(mon):
         self.evlvl=101 # stone evolve bypss
         self.stats.faintxp=82
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class raichu(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -392,7 +434,7 @@ class raichu(mon):
         self.evolvable=0
         self.stats.faintxp=122
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class sandshrew(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -403,7 +445,7 @@ class sandshrew(mon):
         self.evlvl=22
         self.stats.faintxp=93
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class sandslash(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -413,7 +455,7 @@ class sandslash(mon):
         self.evolvable=0
         self.stats.faintxp=163
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class nidoranF(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -425,7 +467,7 @@ class nidoranF(mon):
         self.evlvl=16
         self.stats.faintxp=59
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class nidorina(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -437,7 +479,7 @@ class nidorina(mon):
         self.evlvl=101 #stone evolve bypass
         self.stats.faintxp=117
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class nidoqueen(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -448,7 +490,7 @@ class nidoqueen(mon):
         self.evolvable=0
         self.stats.faintxp=194
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class nidoranM(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[46,57,40,40,40,50],xpr=2)
@@ -460,7 +502,7 @@ class nidoranM(mon):
         self.evlvl=16
         self.stats.faintxp=60
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class nidorino(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -472,7 +514,7 @@ class nidorino(mon):
         self.evlvl=101 #stoneevl bypass
         self.stats.faintxp=118
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class nidoking(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -483,7 +525,7 @@ class nidoking(mon):
         self.evolvable=0
         self.stats.faintxp=195
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class clefairy(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -492,7 +534,7 @@ class clefairy(mon):
         self.xprate=4
         self.stats.faintxp=68
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class clefable(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -501,7 +543,7 @@ class clefable(mon):
         self.xprate=4
         self.stats.faintxp=129
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class vulpix(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -510,7 +552,7 @@ class vulpix(mon):
         self.xprate=3
         self.stats.faintxp=63
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class ninetails(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -519,7 +561,7 @@ class ninetails(mon):
         self.xprate=3
         self.stats.faintxp=178
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class jigglypuff(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -528,7 +570,7 @@ class jigglypuff(mon):
         self.xprate=4
         self.stats.faintxp=76
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class wigglytuff(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -537,7 +579,7 @@ class wigglytuff(mon):
         self.xprate=4
         self.stats.faintxp=106
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class zubat(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -546,7 +588,7 @@ class zubat(mon):
         self.xprate=3
         self.stats.faintxp=54
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class golbat(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -555,7 +597,7 @@ class golbat(mon):
         self.xprate=3
         self.stats.faintxp=171
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class oddish(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -564,7 +606,7 @@ class oddish(mon):
         self.xprate=2
         self.stats.faintxp=78
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class gloom(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -573,7 +615,7 @@ class gloom(mon):
         self.xprate=2
         self.stats.faintxp=132
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class vileplume(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -582,7 +624,7 @@ class vileplume(mon):
         self.xprate=2
         self.stats.faintxp=184
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class paras(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -591,7 +633,7 @@ class paras(mon):
         self.xprate=3
         self.stats.faintxp=70
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class parasect(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -600,7 +642,7 @@ class parasect(mon):
         self.xprate=3
         self.stats.faintxp=128
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class venonat(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -609,7 +651,7 @@ class venonat(mon):
         self.xprate=3
         self.stats.faintxp=75
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class venomoth(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -618,7 +660,7 @@ class venomoth(mon):
         self.xprate=3
         self.stats.faintxp=138
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class diglett(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -627,7 +669,7 @@ class diglett(mon):
         self.xprate=3
         self.stats.faintxp=81
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class dugtrio(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -636,7 +678,7 @@ class dugtrio(mon):
         self.xprate=3
         self.stats.faintxp=153
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class meowth(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -645,7 +687,7 @@ class meowth(mon):
         self.xprate=3
         self.stats.faintxp=69
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class persian(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -654,7 +696,7 @@ class persian(mon):
         self.xprate=3
         self.stats.faintxp=148
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class psyduck(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -663,7 +705,7 @@ class psyduck(mon):
         self.xprate=3
         self.stats.faintxp=80
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class golduck(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -672,7 +714,7 @@ class golduck(mon):
         self.xprate=3
         self.stats.faintxp=174
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class mankey(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -683,7 +725,7 @@ class mankey(mon):
         self.evlvl=28
         self.stats.faintxp=74
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class primeape(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -692,7 +734,7 @@ class primeape(mon):
         self.xprate=3
         self.stats.faintxp=149
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class growlith(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -701,7 +743,7 @@ class growlith(mon):
         self.xprate=1
         self.stats.faintxp=91
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class arcanine(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -710,7 +752,7 @@ class arcanine(mon):
         self.xprate=1
         self.stats.faintxp=213
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class poliwag(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -719,7 +761,7 @@ class poliwag(mon):
         self.xprate=2
         self.stats.faintxp=77
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class poliwhirl(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -728,7 +770,7 @@ class poliwhirl(mon):
         self.xprate=2
         self.stats.faintxp=131
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class poliwrath(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -737,7 +779,7 @@ class poliwrath(mon):
         self.xprate=2
         self.stats.faintxp=185
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class abra(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[25,20,15,105,55,90],xpr=2)#gen3 base stats. g1=45,49,49,65,65,45
@@ -746,7 +788,7 @@ class abra(mon):
         self.xprate=2
         self.stats.faintxp=73
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class kadabra(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -755,7 +797,7 @@ class kadabra(mon):
         self.xprate=2
         self.stats.faintxp=145
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class alakazam(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -764,7 +806,7 @@ class alakazam(mon):
         self.xprate=2
         self.stats.faintxp=186
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class machop(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -773,7 +815,7 @@ class machop(mon):
         self.xprate=2
         self.stats.faintxp=88
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class machoke(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -782,7 +824,7 @@ class machoke(mon):
         self.xprate=2
         self.stats.faintxp=146
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class machamp(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -791,7 +833,7 @@ class machamp(mon):
         self.xprate=2
         self.stats.faintxp=193
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class bellsprout(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -800,7 +842,7 @@ class bellsprout(mon):
         self.xprate=2
         self.stats.faintxp=84
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class weepinbell(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -809,7 +851,7 @@ class weepinbell(mon):
         self.xprate=2
         self.stats.faintxp=151
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class victreebel(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -818,7 +860,7 @@ class victreebel(mon):
         self.xprate=2
         self.stats.faintxp=191
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class tentacool(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -827,7 +869,7 @@ class tentacool(mon):
         self.xprate=1
         self.stats.faintxp=105
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class tentacruel(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -836,7 +878,7 @@ class tentacruel(mon):
         self.xprate=1
         self.stats.faintxp=205
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class geodude(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -845,7 +887,7 @@ class geodude(mon):
         self.xprate=2
         self.stats.faintxp=86
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class graveler(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -854,7 +896,7 @@ class graveler(mon):
         self.xprate=2
         self.stats.faintxp=134
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class golem(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -863,7 +905,7 @@ class golem(mon):
         self.xprate=2
         self.stats.faintxp=177
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class ponyta(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -872,7 +914,7 @@ class ponyta(mon):
         self.xprate=3
         self.stats.faintxp=152
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class rapidash(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -881,7 +923,7 @@ class rapidash(mon):
         self.xprate=3
         self.stats.faintxp=192
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class slowpoke(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -890,7 +932,7 @@ class slowpoke(mon):
         self.xprate=3
         self.stats.faintxp=99
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class slowbro(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -899,7 +941,7 @@ class slowbro(mon):
         self.xprate=3
         self.stats.faintxp=164
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class magnemite(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -908,7 +950,7 @@ class magnemite(mon):
         self.xprate=3
         self.stats.faintxp=89
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class magneton(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -917,7 +959,7 @@ class magneton(mon):
         self.xprate=3
         self.stats.faintxp=161
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class farfetchd(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -926,7 +968,7 @@ class farfetchd(mon):
         self.xprate=3
         self.stats.faintxp=94
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class doduo(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -935,7 +977,7 @@ class doduo(mon):
         self.xprate=3
         self.stats.faintxp=96
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class dodrio(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -944,7 +986,7 @@ class dodrio(mon):
         self.xprate=3
         self.stats.faintxp=158
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class seel(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -953,7 +995,7 @@ class seel(mon):
         self.xprate=3
         self.stats.faintxp=100
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class dewgong(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -962,7 +1004,7 @@ class dewgong(mon):
         self.xprate=3
         self.stats.faintxp=176
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class grimer(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -971,7 +1013,7 @@ class grimer(mon):
         self.xprate=3
         self.stats.faintxp=90
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class muk(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -980,7 +1022,7 @@ class muk(mon):
         self.xprate=3
         self.stats.faintxp=157
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class shellder(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -989,7 +1031,7 @@ class shellder(mon):
         self.xprate=1
         self.stats.faintxp=97
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class cloyster(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -998,7 +1040,7 @@ class cloyster(mon):
         self.xprate=1
         self.stats.faintxp=203
         self.moveladder={-1:[143]}
-
+        self.wildMovesetFill()
 class ghastly(mon):
     def __init__(self, lvl=5):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
@@ -1007,6 +1049,7 @@ class ghastly(mon):
         self.xprate=2
         self.stats.faintxp=95
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class haunter(mon):
     def __init__(self, lvl=5):
@@ -1016,6 +1059,7 @@ class haunter(mon):
         self.xprate=2
         self.stats.faintxp=126
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class gengar(mon):
     def __init__(self, lvl=5):
@@ -1025,6 +1069,7 @@ class gengar(mon):
         self.xprate=2
         self.stats.faintxp=190
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class onix(mon):
     def __init__(self, lvl=5):
@@ -1034,6 +1079,7 @@ class onix(mon):
         self.xprate=3
         self.stats.faintxp=108
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class drowzee(mon):
     def __init__(self, lvl=5):
@@ -1043,6 +1089,7 @@ class drowzee(mon):
         self.xprate=3
         self.stats.faintxp=102
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class hypno(mon):
     def __init__(self, lvl=5):
@@ -1052,6 +1099,7 @@ class hypno(mon):
         self.xprate=3
         self.stats.faintxp=165
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class krabby(mon):
     def __init__(self, lvl=5):
@@ -1061,6 +1109,7 @@ class krabby(mon):
         self.xprate=3
         self.stats.faintxp=115
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class kingler(mon):
     def __init__(self, lvl=5):
@@ -1070,6 +1119,7 @@ class kingler(mon):
         self.xprate=3
         self.stats.faintxp=206
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class voltorb(mon):
     def __init__(self, lvl=5):
@@ -1079,6 +1129,7 @@ class voltorb(mon):
         self.xprate=3
         self.stats.faintxp=103
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class electrode(mon):
     def __init__(self, lvl=5):
@@ -1088,6 +1139,7 @@ class electrode(mon):
         self.xprate=3
         self.stats.faintxp=150
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class exeggcute(mon):
     def __init__(self, lvl=5):
@@ -1097,6 +1149,7 @@ class exeggcute(mon):
         self.xprate=1
         self.stats.faintxp=98
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class exeggutor(mon):
     def __init__(self, lvl=5):
@@ -1106,6 +1159,7 @@ class exeggutor(mon):
         self.xprate=1
         self.stats.faintxp=212
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class cubone(mon):
     def __init__(self, lvl=5):
@@ -1115,6 +1169,7 @@ class cubone(mon):
         self.xprate=3
         self.stats.faintxp=87
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class marowak(mon):
     def __init__(self, lvl=5):
@@ -1124,6 +1179,7 @@ class marowak(mon):
         self.xprate=3
         self.stats.faintxp=124
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class hitmonlee(mon):
     def __init__(self, lvl=5):
@@ -1133,6 +1189,7 @@ class hitmonlee(mon):
         self.xprate=3
         self.stats.faintxp=139
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class hitmonchan(mon):
     def __init__(self, lvl=5):
@@ -1142,6 +1199,7 @@ class hitmonchan(mon):
         self.xprate=3
         self.stats.faintxp=140
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class lickitung(mon):
     def __init__(self, lvl=5):
@@ -1151,6 +1209,7 @@ class lickitung(mon):
         self.xprate=3
         self.stats.faintxp=127
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class koffing(mon):
     def __init__(self, lvl=5):
@@ -1160,6 +1219,7 @@ class koffing(mon):
         self.xprate=3
         self.stats.faintxp=114
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class weezing(mon):
     def __init__(self, lvl=5):
@@ -1169,6 +1229,7 @@ class weezing(mon):
         self.xprate=3
         self.stats.faintxp=173
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class rhyhorn(mon):
     def __init__(self, lvl=5):
@@ -1178,6 +1239,7 @@ class rhyhorn(mon):
         self.xprate=1
         self.stats.faintxp=135
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class rhydon(mon):
     def __init__(self, lvl=5):
@@ -1187,6 +1249,7 @@ class rhydon(mon):
         self.xprate=1
         self.stats.faintxp=204
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class chansey(mon):
     def __init__(self, lvl=5):
@@ -1196,6 +1259,7 @@ class chansey(mon):
         self.xprate=4
         self.stats.faintxp=255
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class tangela(mon):
     def __init__(self, lvl=5):
@@ -1205,6 +1269,7 @@ class tangela(mon):
         self.xprate=3
         self.stats.faintxp=166
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class kangaskhan(mon):
     def __init__(self, lvl=5):
@@ -1214,6 +1279,7 @@ class kangaskhan(mon):
         self.xprate=3
         self.stats.faintxp=175
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class horsea(mon):
     def __init__(self, lvl=5):
@@ -1223,6 +1289,7 @@ class horsea(mon):
         self.xprate=3
         self.stats.faintxp=83
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class seadra(mon):
     def __init__(self, lvl=5):
@@ -1232,6 +1299,7 @@ class seadra(mon):
         self.xprate=3
         self.stats.faintxp=155
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class goldeen(mon):
     def __init__(self, lvl=5):
@@ -1241,6 +1309,7 @@ class goldeen(mon):
         self.xprate=3
         self.stats.faintxp=111
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class seaking(mon):
     def __init__(self, lvl=5):
@@ -1250,6 +1319,7 @@ class seaking(mon):
         self.xprate=3
         self.stats.faintxp=170
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class staryu(mon):
     def __init__(self, lvl=5):
@@ -1259,6 +1329,7 @@ class staryu(mon):
         self.xprate=1
         self.stats.faintxp=106
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class starmie(mon):
     def __init__(self, lvl=5):
@@ -1268,6 +1339,7 @@ class starmie(mon):
         self.xprate=1
         self.stats.faintxp=207
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class mrmime(mon):
     def __init__(self, lvl=5):
@@ -1277,6 +1349,7 @@ class mrmime(mon):
         self.xprate=3
         self.stats.faintxp=136
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class scyther(mon):
     def __init__(self, lvl=5):
@@ -1286,6 +1359,7 @@ class scyther(mon):
         self.xprate=3
         self.stats.faintxp=187
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class jynx(mon):
     def __init__(self, lvl=5):
@@ -1295,6 +1369,7 @@ class jynx(mon):
         self.xprate=3
         self.stats.faintxp=137
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class electabuzz(mon):
     def __init__(self, lvl=5):
@@ -1304,6 +1379,7 @@ class electabuzz(mon):
         self.xprate=3
         self.stats.faintxp=156
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class magmar(mon):
     def __init__(self, lvl=5):
@@ -1313,6 +1389,7 @@ class magmar(mon):
         self.xprate=3
         self.stats.faintxp=167
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class pinsir(mon):
     def __init__(self, lvl=5):
@@ -1322,6 +1399,7 @@ class pinsir(mon):
         self.xprate=1
         self.stats.faintxp=200
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class tauros(mon):
     def __init__(self, lvl=5):
@@ -1331,6 +1409,7 @@ class tauros(mon):
         self.xprate=1
         self.stats.faintxp=211
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class magikarp(mon):
     def __init__(self, lvl=5):
@@ -1340,6 +1419,7 @@ class magikarp(mon):
         self.xprate=1
         self.stats.faintxp=20
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class gyarados(mon):
     def __init__(self, lvl=5):
@@ -1349,6 +1429,7 @@ class gyarados(mon):
         self.xprate=1
         self.stats.faintxp=214
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class lapras(mon):
     def __init__(self, lvl=5):
@@ -1358,6 +1439,7 @@ class lapras(mon):
         self.xprate=1
         self.stats.faintxp=219
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class ditto(mon):
     def __init__(self, lvl=5):
@@ -1367,6 +1449,7 @@ class ditto(mon):
         self.xprate=3
         self.stats.faintxp=61
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class eevee(mon):
     def __init__(self, lvl=5):
@@ -1376,6 +1459,7 @@ class eevee(mon):
         self.xprate=3
         self.stats.faintxp=92
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class vaporeon(mon):
     def __init__(self, lvl=5):
@@ -1385,6 +1469,7 @@ class vaporeon(mon):
         self.xprate=3
         self.stats.faintxp=196
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class jolteon(mon):
     def __init__(self, lvl=5):
@@ -1394,6 +1479,7 @@ class jolteon(mon):
         self.xprate=3
         self.stats.faintxp=197
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class flareon(mon):
     def __init__(self, lvl=5):
@@ -1403,6 +1489,7 @@ class flareon(mon):
         self.xprate=3
         self.stats.faintxp=198
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class porygon(mon):
     def __init__(self, lvl=5):
@@ -1412,6 +1499,7 @@ class porygon(mon):
         self.xprate=3
         self.stats.faintxp=130
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class omanyte(mon):
     def __init__(self, lvl=5):
@@ -1421,6 +1509,7 @@ class omanyte(mon):
         self.xprate=3
         self.stats.faintxp=120
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class omastar(mon):
     def __init__(self, lvl=5):
@@ -1430,6 +1519,7 @@ class omastar(mon):
         self.xprate=3
         self.stats.faintxp=199
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class kabuto(mon):
     def __init__(self, lvl=5):
@@ -1447,6 +1537,7 @@ class kabutops(mon):
         self.xprate=3
         self.stats.faintxp=201
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class aerodactyl(mon):
     def __init__(self, lvl=5):
@@ -1456,6 +1547,7 @@ class aerodactyl(mon):
         self.xprate=1
         self.stats.faintxp=202
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class snorlax(mon):
     def __init__(self, lvl=5):
@@ -1465,6 +1557,7 @@ class snorlax(mon):
         self.xprate=1
         self.stats.faintxp=154
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class articuno(mon):
     def __init__(self, lvl=5):
@@ -1474,6 +1567,7 @@ class articuno(mon):
         self.xprate=1
         self.stats.faintxp=215
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class zapdos(mon):
     def __init__(self, lvl=5):
@@ -1483,6 +1577,7 @@ class zapdos(mon):
         self.xprate=1
         self.stats.faintxp=216
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class moltres(mon):
     def __init__(self, lvl=5):
@@ -1492,6 +1587,7 @@ class moltres(mon):
         self.xprate=1
         self.stats.faintxp=217
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class dratini(mon):
     def __init__(self, lvl=5):
@@ -1501,6 +1597,7 @@ class dratini(mon):
         self.xprate=1
         self.stats.faintxp=67
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class dragonair(mon):
     def __init__(self, lvl=5):
@@ -1510,6 +1607,7 @@ class dragonair(mon):
         self.xprate=1
         self.stats.faintxp=144
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class dragonite(mon):
     def __init__(self, lvl=5):
@@ -1519,6 +1617,7 @@ class dragonite(mon):
         self.xprate=1
         self.stats.faintxp=218
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class mewtwo(mon):
     def __init__(self, lvl=5):
@@ -1528,6 +1627,7 @@ class mewtwo(mon):
         self.xprate=1
         self.stats.faintxp=220
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 class mew(mon):
     def __init__(self, lvl=5):
@@ -1537,6 +1637,7 @@ class mew(mon):
         self.xprate=2
         self.stats.faintxp=64
         self.moveladder={-1:[143]}
+        self.wildMovesetFill()
 
 
 pokeclasses=[
