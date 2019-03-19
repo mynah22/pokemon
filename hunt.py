@@ -47,7 +47,6 @@ def hunt(pl):
         rmon=pokeclasses[selectedTup[0]-1](lvl=selectedTup[3])
     else:
         rmon=pokeclasses[selectedTup[0]-1](lvl=rrang(selectedTup[2],selectedTup[3]))      
-    print 2
     encfin=False #encounter finished flag set to untrue
     if pl.dex.icn[rmon.pokedexid][0]<1:
         pl.dex.icn[rmon.pokedexid][0]=1 #set encountered flag in dex for wild monster
@@ -67,7 +66,7 @@ def hunt(pl):
         
         inp=pMenu(huntMen)
         
-        #user selection = attack
+        #if user selection = attack
         if inp=='attack':
             clear()  
             #move select phase
