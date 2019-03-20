@@ -1,5 +1,37 @@
-stat stages
-	there is a -6 -> +6 scale for in-combat stat modification.
-	The levels are refered to as the stat stages, and a simple 
-	map between the stat stage and calculation coefficient is
-	all that is needed to correctly compute attack mechanics.
+Monsters:
+	types
+	move ladders
+	evl lvls
+	base stats
+	TM/HMs
+
+
+Attacks:
+	type
+	specflag
+	mechanic
+	TM/HMs
+	damage
+	PP
+
+Zones:
+	full zonelist
+	grass pokelists
+	borders
+	surf/fish pokelist
+	cut/strength passage mechanic
+	gyms/pokecenters
+	flyable (indoor) flag
+	trainers*
+	trainer access regions
+		(The idea would be to divide trainers into groups representing 
+		all trainers encounterable at a given stage of the storyline, 
+		and require the CLI player to defeat all trainers in open access
+		regions in a zone to unlock the newly accessible borders.)
+
+Trainers:
+	no run
+	$, remove $ from wild
+	xp boost?
+	ai?
+	
