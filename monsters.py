@@ -25,7 +25,6 @@ class mon(object):
         self.calcAllStats()
         self.hp=int(self.stats.stats['hp'])
         self.types=['Normal']
-   
     def calcAllStats(self):
         for st in self.stats.statNames:
             if st=='hp':
@@ -59,18 +58,6 @@ class mon(object):
             return 3.5
         if statStage == 6:
             return 4
-
-
-    def attack(self, target):
-        if roll(60):
-            dmg=self.stats.stats['atk']
-            dmg-=target.stats.stats['def']/1.25
-            dmg+=1
-            if dmg < 0:
-                dmg = 0
-            target.hp-=int(dmg)
-            if target.hp<0:
-                target.hp=0
     def wildAttack(self):
         usableAtks=[]
         for movekey in self.moveset:
@@ -115,7 +102,6 @@ class mon(object):
         for moveid in movelist:
              self.moveset[c]=attackClasses[moveid]()
              c+=1
-
 
 class bulbasaur(mon):
     def __init__(self, lvl=5):
