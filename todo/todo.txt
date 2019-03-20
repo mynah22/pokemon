@@ -1,3 +1,29 @@
+***Attack mechanics:
+	set crit (and accuracy?) to variables w/default values
+	in calcDamage. pass modified values in attack class 
+	cast() method
+
+
+	bulb
+		72		leechseed #status mechanic?
+		93		poisonpowder #status mechanic
+		101		razorleaf #+crit mech
+		121		sleeppowder #status mechanic
+		126		solarbeam  # 2 move attack mech
+	char
+		39		ember ##status mechanic
+		100		rage  #unique attack-choice lock mech
+		120		slash #crit+ mech
+		45		flamethrower #status mech
+		43		firespin #turn lock mech and target switch
+				lock mech
+	squirt
+		10		bite # flich mech
+		117		skullbash # 2 move mech
+	Ratata
+		048	focus energy @23 ###unique crit boost mech
+		#
+
 Monsters:
 	types
 	move ladders

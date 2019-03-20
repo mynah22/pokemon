@@ -29,7 +29,7 @@ def pbMenu(player):
     for item in player.balls:
         if player.balls[item] > 0:
             mendic[numb]=item
-            print str(numb)+':   '+item
+            print str(numb)+':   '+item+'  x'+str(player.balls[item])
             numb+=1
     if len(mendic)<1:
         print 'no pokeballs!\n\n'

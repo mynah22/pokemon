@@ -190,7 +190,7 @@ class attack:
 			dmg=int((dmg+0.0)*sameTypeMod)
 			dmg=int(((dmg+0.0)*typeMod)/10)
 			dmg=int((dmg+0.0)*(rrang(217,255)/255.0))		
-		elif self.specFlag==1:
+		elif self.specflag==1:
 			dmg=0.0
 			dmg=int(2*lvlWithCritMod)
 			dmg=int(dmg/5.0+2)
@@ -240,13 +240,11 @@ class Acid(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
 	def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class AcidArmor(attack):
     def __init__(self):
@@ -261,13 +259,11 @@ class AcidArmor(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Agility(attack):
     def __init__(self):
@@ -303,13 +299,11 @@ class Amnesia(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Aurrorabeam(attack):
     def __init__(self):
@@ -324,13 +318,11 @@ class Aurrorabeam(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Barrage(attack):
     def __init__(self):
@@ -345,13 +337,11 @@ class Barrage(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Barrier(attack):
     def __init__(self):
@@ -366,13 +356,11 @@ class Barrier(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Bide(attack):
     def __init__(self):
@@ -387,13 +375,11 @@ class Bide(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Bind(attack):
     def __init__(self):
@@ -408,34 +394,30 @@ class Bind(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Bite(attack):
     def __init__(self):
 		self.atkId=10
 		self.type='Normal'
 		self.name='Bite'
-		self.remainingUsagePoints=35
-		self.maxUsagePoints=35
-		self.baseDamage=35
-		self.accuracy=95
+		self.remainingUsagePoints=25
+		self.maxUsagePoints=25
+		self.baseDamage=60
+		self.accuracy=100
 		self.specflag=0
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Blizzard(attack):
     def __init__(self):
@@ -450,13 +432,11 @@ class Blizzard(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Bodyslam(attack):
     def __init__(self):
@@ -471,13 +451,11 @@ class Bodyslam(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class BoneClub(attack):
     def __init__(self):
@@ -492,13 +470,11 @@ class BoneClub(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Bonemerang(attack):
     def __init__(self):
@@ -513,34 +489,32 @@ class Bonemerang(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Bubble(attack):
     def __init__(self):
 		self.atkId=15
-		self.type='Normal'
+		self.type='Water'
 		self.name='Bubble'
-		self.remainingUsagePoints=35
-		self.maxUsagePoints=35
-		self.baseDamage=35
-		self.accuracy=95
-		self.specflag=0
-		self.incomplete=1 #finish
+		self.remainingUsagePoints=30
+		self.maxUsagePoints=30
+		self.baseDamage=20
+		self.accuracy=100
+		self.specflag=1
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
+			if target.stats.combatStages['speed'] > -6 and roll(30):
+				target.stats.combatStages['speed'] -= 1
+				print target.name+' slowed down!'
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Bubblebeam(attack):
     def __init__(self):
@@ -555,13 +529,11 @@ class Bubblebeam(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Clamp(attack):
     def __init__(self):
@@ -576,13 +548,11 @@ class Clamp(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Cometpunch(attack):
     def __init__(self):
@@ -597,13 +567,11 @@ class Cometpunch(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Confuseray(attack):
     def __init__(self):
@@ -618,13 +586,11 @@ class Confuseray(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Confusion(attack):
     def __init__(self):
@@ -639,13 +605,11 @@ class Confusion(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Constrict(attack):
     def __init__(self):
@@ -660,13 +624,11 @@ class Constrict(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Conversion(attack):
     def __init__(self):
@@ -681,13 +643,11 @@ class Conversion(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Counter(attack):
     def __init__(self):
@@ -703,13 +663,11 @@ class Counter(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Crabhammer(attack):
     def __init__(self):
@@ -724,13 +682,11 @@ class Crabhammer(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Cut(attack):
     def __init__(self):
@@ -745,13 +701,11 @@ class Cut(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class DefenseCurl(attack):
     def __init__(self):
@@ -766,13 +720,11 @@ class DefenseCurl(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Dig(attack):
     def __init__(self):
@@ -787,13 +739,11 @@ class Dig(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Disable(attack):
     def __init__(self):
@@ -808,13 +758,11 @@ class Disable(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class DizzyPunch(attack):
     def __init__(self):
@@ -829,13 +777,11 @@ class DizzyPunch(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class DoubleEdge(attack):
     def __init__(self):
@@ -850,13 +796,11 @@ class DoubleEdge(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Doublekick(attack):
     def __init__(self):
@@ -871,13 +815,11 @@ class Doublekick(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Doubleslap(attack):
     def __init__(self):
@@ -892,13 +834,11 @@ class Doubleslap(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Doubleteam(attack):
     def __init__(self):
@@ -913,13 +853,11 @@ class Doubleteam(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class DragonRage(attack):
     def __init__(self):
@@ -934,13 +872,11 @@ class DragonRage(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class DreamEater(attack):
     def __init__(self):
@@ -955,13 +891,11 @@ class DreamEater(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class DrillPeck(attack):
     def __init__(self):
@@ -995,13 +929,11 @@ class EarthQuake(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class EggBomb(attack):
     def __init__(self):
@@ -1016,34 +948,30 @@ class EggBomb(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Ember(attack):
     def __init__(self):
 		self.atkId=39
-		self.type='Normal'
+		self.type='Fire'
 		self.name='Ember'
-		self.remainingUsagePoints=35
-		self.maxUsagePoints=35
-		self.baseDamage=35
-		self.accuracy=95
-		self.specflag=0
+		self.remainingUsagePoints=25
+		self.maxUsagePoints=25
+		self.baseDamage=40
+		self.accuracy=100
+		self.specflag=1
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Explosion(attack):
     def __init__(self):
@@ -1058,13 +986,11 @@ class Explosion(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Fireblast(attack):
     def __init__(self):
@@ -1079,13 +1005,11 @@ class Fireblast(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Firepunch(attack):
     def __init__(self):
@@ -1100,13 +1024,11 @@ class Firepunch(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Firespin(attack):
     def __init__(self):
@@ -1121,13 +1043,11 @@ class Firespin(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Fissure(attack):
     def __init__(self):
@@ -1142,34 +1062,30 @@ class Fissure(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Flamethrower(attack):
     def __init__(self):
 		self.atkId=45
-		self.type='Normal'
+		self.type='Fire'
 		self.name='Flamethrower'
-		self.remainingUsagePoints=35
-		self.maxUsagePoints=35
-		self.baseDamage=35
-		self.accuracy=95
-		self.specflag=0
+		self.remainingUsagePoints=15
+		self.maxUsagePoints=15
+		self.baseDamage=95
+		self.accuracy=100
+		self.specflag=1
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Flash(attack):
     def __init__(self):
@@ -1184,13 +1100,11 @@ class Flash(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Fly(attack):
     def __init__(self):
@@ -1205,13 +1119,11 @@ class Fly(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class FocusEnergy(attack):
     def __init__(self):
@@ -1226,13 +1138,11 @@ class FocusEnergy(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class FuryAttack(attack):
     def __init__(self):
@@ -1270,13 +1180,11 @@ class FurySwipes(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Glare(attack):
     def __init__(self):
@@ -1291,13 +1199,11 @@ class Glare(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Growl(attack):
     def __init__(self):
@@ -1311,18 +1217,13 @@ class Growl(attack):
 		self.specflag=0
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
-		if roll(self.accuracy):
-			if user.stats.combatStages['atk'] < 6:
-				user.stats.combatStages['atk'] += 1
-				self.remainingUsagePoints-=1
-				return 1
-			else:
-				self.remainingUsagePoints-=1
-				return 0
+		self.remainingUsagePoints-=1
+		if user.stats.combatStages['atk'] < 6:
+			user.stats.combatStages['atk'] += 1
+			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
+
 class Growth(attack):
     def __init__(self):
 		self.atkId=53
@@ -1336,14 +1237,15 @@ class Growth(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
-		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+		self.remainingUsagePoints-=1
+		if user.stats.combatStages['spAtk'] < 6:
+			user.stats.combatStages['spAtk'] += 1
+		if user.stats.combatStages['spDef'] < 6:
+			user.stats.combatStages['spDef'] += 1
 			return 1
-		else:
-			self.remainingUsagePoints-=1
+		elif user.stats.combatStages['spAtk'] > 5 and user.stats.combatStages['spDef'] > 5:
 			return 0
+		return 1
 class Guillotine(attack):
     def __init__(self):
 		self.atkId=54
@@ -1357,13 +1259,11 @@ class Guillotine(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Gust(attack):
     def __init__(self):
@@ -1377,13 +1277,11 @@ class Gust(attack):
 		self.specflag=0
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Harden(attack):
     def __init__(self):
@@ -1398,13 +1296,11 @@ class Harden(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Haze(attack):
     def __init__(self):
@@ -1419,13 +1315,11 @@ class Haze(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class HEadbutt(attack):
     def __init__(self):
@@ -1440,13 +1334,11 @@ class HEadbutt(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class HiJumpKick(attack):
     def __init__(self):
@@ -1461,13 +1353,11 @@ class HiJumpKick(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class HornAttack(attack):
     def __init__(self):
@@ -1482,13 +1372,11 @@ class HornAttack(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class HornDrill(attack):
     def __init__(self):
@@ -1503,34 +1391,29 @@ class HornDrill(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Hydropump(attack):
     def __init__(self):
 		self.atkId=62
-		self.type='Normal'
+		self.type='Water'
 		self.name='Hydropump'
-		self.remainingUsagePoints=35
-		self.maxUsagePoints=35
-		self.baseDamage=35
-		self.accuracy=95
-		self.specflag=0
-		self.incomplete=1 #finish
+		self.remainingUsagePoints=5
+		self.maxUsagePoints=5
+		self.baseDamage=120
+		self.accuracy=80
+		self.specflag=1
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Hyperbeam(attack):
     def __init__(self):
@@ -1545,13 +1428,11 @@ class Hyperbeam(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Hyperfang(attack):
     def __init__(self):
@@ -1565,13 +1446,11 @@ class Hyperfang(attack):
 		self.specflag=0
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Hypnosis(attack):
     def __init__(self):
@@ -1586,13 +1465,11 @@ class Hypnosis(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Icebeam(attack):
     def __init__(self):
@@ -1607,13 +1484,11 @@ class Icebeam(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Icepunch(attack):
     def __init__(self):
@@ -1628,13 +1503,11 @@ class Icepunch(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Jumpkick(attack):
     def __init__(self):
@@ -1649,13 +1522,11 @@ class Jumpkick(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Karatechop(attack):
     def __init__(self):
@@ -1670,13 +1541,11 @@ class Karatechop(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Kinesis(attack):
     def __init__(self):
@@ -1691,13 +1560,11 @@ class Kinesis(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Leechlife(attack):
     def __init__(self):
@@ -1712,13 +1579,11 @@ class Leechlife(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Leechseed(attack):
     def __init__(self):
@@ -1733,13 +1598,11 @@ class Leechseed(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class leer(attack):
     def __init__(self):
@@ -1778,13 +1641,11 @@ class Lick(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Lightscreen(attack):
     def __init__(self):
@@ -1799,13 +1660,11 @@ class Lightscreen(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class LovelyKiss(attack):
     def __init__(self):
@@ -1820,13 +1679,11 @@ class LovelyKiss(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class LowKick(attack):
     def __init__(self):
@@ -1841,13 +1698,11 @@ class LowKick(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Meditate(attack):
     def __init__(self):
@@ -1862,13 +1717,11 @@ class Meditate(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class MegaDrain(attack):
     def __init__(self):
@@ -1883,13 +1736,11 @@ class MegaDrain(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Megakick(attack):
     def __init__(self):
@@ -1904,13 +1755,11 @@ class Megakick(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class MegaPunch(attack):
     def __init__(self):
@@ -1925,13 +1774,11 @@ class MegaPunch(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Metronome(attack):
     def __init__(self):
@@ -1946,13 +1793,11 @@ class Metronome(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Mimic(attack):
     def __init__(self):
@@ -1967,13 +1812,11 @@ class Mimic(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Minimize(attack):
     def __init__(self):
@@ -1988,13 +1831,11 @@ class Minimize(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Mirrormove(attack):
     def __init__(self):
@@ -2009,13 +1850,11 @@ class Mirrormove(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Mist(attack):
     def __init__(self):
@@ -2030,13 +1869,11 @@ class Mist(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Nightshade(attack):
     def __init__(self):
@@ -2051,13 +1888,11 @@ class Nightshade(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Payday(attack):
     def __init__(self):
@@ -2072,13 +1907,11 @@ class Payday(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class PEck(attack):
     def __init__(self):
@@ -2092,13 +1925,11 @@ class PEck(attack):
 		self.specflag=0
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class PEtaldance(attack):
     def __init__(self):
@@ -2113,13 +1944,11 @@ class PEtaldance(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Pinmissile(attack):
     def __init__(self):
@@ -2134,13 +1963,11 @@ class Pinmissile(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class PoisonGas(attack):
     def __init__(self):
@@ -2155,13 +1982,11 @@ class PoisonGas(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Poisonpowder(attack):
     def __init__(self):
@@ -2176,13 +2001,11 @@ class Poisonpowder(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class PoisonSting(attack):
     def __init__(self):
@@ -2197,13 +2020,11 @@ class PoisonSting(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Pound(attack):
     def __init__(self):
@@ -2218,13 +2039,11 @@ class Pound(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Psybeam(attack):
     def __init__(self):
@@ -2239,13 +2058,11 @@ class Psybeam(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Psychic(attack):
     def __init__(self):
@@ -2260,13 +2077,11 @@ class Psychic(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Psywave(attack):
     def __init__(self):
@@ -2281,13 +2096,11 @@ class Psywave(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Quickattack(attack):
     def __init__(self):
@@ -2302,13 +2115,11 @@ class Quickattack(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=1
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Rage(attack):
     def __init__(self):
@@ -2323,13 +2134,11 @@ class Rage(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Razorleaf(attack):
     def __init__(self):
@@ -2344,13 +2153,11 @@ class Razorleaf(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Razoewind(attack):
     def __init__(self):
@@ -2365,13 +2172,11 @@ class Razoewind(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Recover(attack):
     def __init__(self):
@@ -2386,13 +2191,11 @@ class Recover(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Reflect(attack):
     def __init__(self):
@@ -2407,13 +2210,11 @@ class Reflect(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class rest(attack):
     def __init__(self):
@@ -2428,13 +2229,11 @@ class rest(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Roar(attack):
     def __init__(self):
@@ -2449,13 +2248,11 @@ class Roar(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Rockslide(attack):
     def __init__(self):
@@ -2470,13 +2267,11 @@ class Rockslide(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Rockthrow(attack):
     def __init__(self):
@@ -2491,13 +2286,11 @@ class Rockthrow(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class RollingKick(attack):
     def __init__(self):
@@ -2512,13 +2305,11 @@ class RollingKick(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class SandAttack(attack):
     def __init__(self):
@@ -2533,13 +2324,11 @@ class SandAttack(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Scratch(attack):
     def __init__(self):
@@ -2548,19 +2337,16 @@ class Scratch(attack):
 		self.name='Scratch'
 		self.remainingUsagePoints=35
 		self.maxUsagePoints=35
-		self.baseDamage=35
-		self.accuracy=95
+		self.baseDamage=40
+		self.accuracy=100
 		self.specflag=0
-		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Screech(attack):
     def __init__(self):
@@ -2575,13 +2361,11 @@ class Screech(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class SeismicToss(attack):
     def __init__(self):
@@ -2596,13 +2380,11 @@ class SeismicToss(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class SelfDestruct(attack):
     def __init__(self):
@@ -2617,13 +2399,11 @@ class SelfDestruct(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Sharpen(attack):
     def __init__(self):
@@ -2638,13 +2418,11 @@ class Sharpen(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Sing(attack):
     def __init__(self):
@@ -2659,13 +2437,11 @@ class Sing(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Skllbash(attack):
     def __init__(self):
@@ -2680,13 +2456,11 @@ class Skllbash(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class SkyAttack(attack):
     def __init__(self):
@@ -2701,13 +2475,11 @@ class SkyAttack(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Slam(attack):
     def __init__(self):
@@ -2722,13 +2494,11 @@ class Slam(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Slash(attack):
     def __init__(self):
@@ -2743,13 +2513,11 @@ class Slash(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Sleeppowder(attack):
     def __init__(self):
@@ -2764,13 +2532,11 @@ class Sleeppowder(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Sludge(attack):
     def __init__(self):
@@ -2785,13 +2551,11 @@ class Sludge(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Smog(attack):
     def __init__(self):
@@ -2806,13 +2570,11 @@ class Smog(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class SmokeScreen(attack):
     def __init__(self):
@@ -2827,13 +2589,11 @@ class SmokeScreen(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class SoftBoiled(attack):
     def __init__(self):
@@ -2848,13 +2608,11 @@ class SoftBoiled(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class SolarBeam(attack):
     def __init__(self):
@@ -2869,13 +2627,11 @@ class SolarBeam(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class SonicBoom(attack):
     def __init__(self):
@@ -2890,13 +2646,11 @@ class SonicBoom(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class SpikeCannon(attack):
     def __init__(self):
@@ -2911,13 +2665,11 @@ class SpikeCannon(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Splash(attack):
     def __init__(self):
@@ -2932,13 +2684,11 @@ class Splash(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Spore(attack):
     def __init__(self):
@@ -2953,13 +2703,11 @@ class Spore(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Stomp(attack):
     def __init__(self):
@@ -2974,13 +2722,11 @@ class Stomp(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Strength(attack):
     def __init__(self):
@@ -2995,13 +2741,11 @@ class Strength(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Stringshot(attack):
     def __init__(self):
@@ -3016,13 +2760,11 @@ class Stringshot(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Struggle(attack):
     def __init__(self):
@@ -3037,13 +2779,11 @@ class Struggle(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class StunSpore(attack):
     def __init__(self):
@@ -3058,13 +2798,11 @@ class StunSpore(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Submission(attack):
     def __init__(self):
@@ -3079,13 +2817,11 @@ class Submission(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Substitute(attack):
     def __init__(self):
@@ -3100,13 +2836,11 @@ class Substitute(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Superfang(attack):
     def __init__(self):
@@ -3141,13 +2875,11 @@ class Supersonic(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Surf(attack):
     def __init__(self):
@@ -3162,13 +2894,11 @@ class Surf(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Swift(attack):
     def __init__(self):
@@ -3183,13 +2913,11 @@ class Swift(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class SwordsDancw(attack):
     def __init__(self):
@@ -3204,13 +2932,11 @@ class SwordsDancw(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Tackle(attack):
     def __init__(self):
@@ -3224,13 +2950,11 @@ class Tackle(attack):
 		self.specflag=0
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Tailwhip(attack):
     def __init__(self):
@@ -3268,13 +2992,11 @@ class Takedown(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Teleport(attack):
     def __init__(self):
@@ -3289,13 +3011,11 @@ class Teleport(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Thrash(attack):
     def __init__(self):
@@ -3310,13 +3030,11 @@ class Thrash(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Thunder(attack):
     def __init__(self):
@@ -3331,13 +3049,11 @@ class Thunder(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Thunderbolt(attack):
     def __init__(self):
@@ -3352,13 +3068,11 @@ class Thunderbolt(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Thunderpunch(attack):
     def __init__(self):
@@ -3373,13 +3087,11 @@ class Thunderpunch(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class ThunderShick(attack):
     def __init__(self):
@@ -3394,13 +3106,11 @@ class ThunderShick(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class ThunderWave(attack):
     def __init__(self):
@@ -3415,13 +3125,11 @@ class ThunderWave(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Toxic(attack):
     def __init__(self):
@@ -3436,13 +3144,11 @@ class Toxic(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Transform(attack):
     def __init__(self):
@@ -3457,13 +3163,11 @@ class Transform(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class TriAttack(attack):
     def __init__(self):
@@ -3478,13 +3182,11 @@ class TriAttack(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Twineedle(attack):
     def __init__(self):
@@ -3499,13 +3201,11 @@ class Twineedle(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Vicegrip(attack):
     def __init__(self):
@@ -3520,34 +3220,29 @@ class Vicegrip(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class VineWhip(attack):
     def __init__(self):
 		self.atkId=158
-		self.type='Normal'
+		self.type='Grass'
 		self.name='VineWhip'
-		self.remainingUsagePoints=35
-		self.maxUsagePoints=35
+		self.remainingUsagePoints=10
+		self.maxUsagePoints=10
 		self.baseDamage=35
-		self.accuracy=95
-		self.specflag=0
-		self.incomplete=1 #finish
+		self.accuracy=100
+		self.specflag=1
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Waterfall(attack):
     def __init__(self):
@@ -3562,34 +3257,29 @@ class Waterfall(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Watergun(attack):
     def __init__(self):
 		self.atkId=160
-		self.type='Normal'
+		self.type='Water'
 		self.name='Watergun'
-		self.remainingUsagePoints=35
-		self.maxUsagePoints=35
-		self.baseDamage=35
-		self.accuracy=95
-		self.specflag=0
-		self.incomplete=1 #finish
+		self.remainingUsagePoints=25
+		self.maxUsagePoints=25
+		self.baseDamage=40
+		self.accuracy=100
+		self.specflag=1
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class Whirlwind(attack):
     def __init__(self):
@@ -3604,13 +3294,11 @@ class Whirlwind(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class WingAttack(attack):
     def __init__(self):
@@ -3624,35 +3312,31 @@ class WingAttack(attack):
 		self.specflag=0
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 class WithDraw(attack):
     def __init__(self):
 		self.atkId=163
 		self.type='Normal'
 		self.name='WithDraw'
-		self.remainingUsagePoints=35
-		self.maxUsagePoints=35
-		self.baseDamage=35
-		self.accuracy=95
+		self.remainingUsagePoints=40
+		self.maxUsagePoints=40
+		self.baseDamage=0
+		self.accuracy=100
 		self.specflag=0
-		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
-		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+		self.remainingUsagePoints-=1
+		if user.stats.combatStages['def'] < 6:
+			user.stats.combatStages['def'] += 1
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
+
 class Wrap(attack):
     def __init__(self):
 		self.atkId=164
@@ -3666,13 +3350,11 @@ class Wrap(attack):
 		self.incomplete=1 #finish
 		self.speedPriority=0
     def cast(self, user, target):
-		dmg=self.calcDamage(user, target)
+		self.remainingUsagePoints-=1
 		if roll(self.accuracy):
-			target.hp-=dmg
-			self.remainingUsagePoints-=1
+			target.hp-=self.calcDamage(user, target)
 			return 1
 		else:
-			self.remainingUsagePoints-=1
 			return 0
 
 class Struggle(attack):
