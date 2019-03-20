@@ -31,8 +31,6 @@ def hpbar(per=50):
     else:
         return "[==========]"
 
-
-
 def hunt(pl):
     zone = zonelist[pl.zone] # get player zone
     clear()
@@ -346,23 +344,24 @@ def hunt(pl):
             print pl.team[0].name+'  '+str(pl.team[0].hp)
             print rmon.name+'  '+str(rmon.hp)
             ball=pbMenu(pl)
-            pl.balls[ball]-=1
-            if ball=='pb':   
-                if roll(20):
-                    rmon.caught(pl)  
-                    pl.dex.caught(rmon)                          
-                    encfin=True
-            if ball=='gb':
-                if roll(30):
-                    rmon.caught(pl)
-                    pl.dex.caught(rmon)                           
-                    encfin=True
-            if ball=='ub':
-                if roll(40):
-                    rmon.caught(pl)
-                    pl.dex.caught(rmon)                            
-                    encfin=True           
-                        
+            if ball:
+                pl.balls[ball]-=1
+                if ball=='pb':   
+                    if roll(20):
+                        rmon.caught(pl)  
+                        pl.dex.caught(rmon)                          
+                        encfin=True
+                if ball=='gb':
+                    if roll(30):
+                        rmon.caught(pl)
+                        pl.dex.caught(rmon)                           
+                        encfin=True
+                if ball=='ub':
+                    if roll(40):
+                        rmon.caught(pl)
+                        pl.dex.caught(rmon)                            
+                        encfin=True           
+                            
 
 
 

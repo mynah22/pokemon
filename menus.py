@@ -31,10 +31,12 @@ def pbMenu(player):
             mendic[numb]=item
             print str(numb)+':   '+item
             numb+=1
-        if len(mendic)<1:
-            print 'no pokeballs!\n\n'
-            xxx=raw_input('press enter')
-    fin=0
+    if len(mendic)<1:
+        print 'no pokeballs!\n\n'
+        xxx=raw_input('press enter')
+        return
+    else:
+        fin=0
     while fin != 1:
        inval=0
        inp=raw_input('enter menu #:')
