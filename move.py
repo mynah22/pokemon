@@ -32,6 +32,15 @@ def move(pl):
  			pl.zone=6
  		if inp =='Route 3':
  			pl.zone=7
+		if inp =='Mt.Moon':
+ 			pl.zone=8
+ 		if inp =='Mt.Moon Basement 1':
+ 			pl.zone=9
+ 		if inp =='Mt.Moon Basement 2':
+ 			pl.zone=10
+ 		if inp =='Route 4':
+ 			pl.zone=11
+
 
  		elif inp == 'Cancel':
  			return

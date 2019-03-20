@@ -58,7 +58,7 @@ def hunt(pl):
     while not encfin:
         clear()
         #monster appears
-        print 'Wild '+rmon.name+' appears!\n'
+#        print 'Wild '+rmon.name+' appears!\n'
         #monster gui
         print 'wild '+rmon.name+'\n'
         print hpbar(100*(float(rmon.hp)/rmon.stats.stats['hp'])) +'   ('+str(rmon.hp)+')   lvl  '+str(rmon.level)+'\n\n'
@@ -70,9 +70,9 @@ def hunt(pl):
         
         #if user selection = attack
         if inp=='attack':
-            clear()  
             #move select phase
             atkid=atkMenu(pl.team[0])
+            clear()
             rmonAtkID=rmon.wildAttack()
             #select first attacker based on move speed priority and atkstat speed
             if pl.team[0].moveset[atkid].speedPriority == rmon.moveset[rmonAtkID].speedPriority:
@@ -100,13 +100,23 @@ def hunt(pl):
                 secondMoveID = atkid
             #
             ####first atk   
-            #                     
+            #
+            clear()                     
             if firstMoveID != 5:
             #if at least 1 move with positive PP
-                print firstAttacker.name+' uses '+firstAttacker.moveset[firstMoveID].name+"!"
                 firstPreAtkHP=firstAttacker.hp
                 secondPreAtkHP=secondAttacker.hp
-                if firstAttacker.moveset[firstMoveID].cast(firstAttacker, secondAttacker):
+                castResult= firstAttacker.moveset[firstMoveID].cast(firstAttacker, secondAttacker) 
+                #rmon gui
+                print 'wild '+rmon.name+'\n'
+                print hpbar(100*(float(rmon.hp)/rmon.stats.stats['hp'])) +'   ('+str(rmon.hp)+')   lvl  '+str(rmon.level)+'\n\n'
+                #player gui
+                print pl.name+"'s "+pl.team[0].name+'\n'
+                print hpbar(100*(float(pl.team[0].hp)/pl.team[0].stats.stats['hp'])) +'   ('+str(pl.team[0].hp)+')   lvl  '+str(pl.team[0].level)+'\n\n'
+                #move display
+                print firstAttacker.name+' uses '+firstAttacker.moveset[firstMoveID].name+"!"
+                #hit/miss display
+                if castResult:
                     print secondAttacker.name +' took '+str(secondPreAtkHP-secondAttacker.hp)+' damage!'
                     if not firstPreAtkHP == firstAttacker.hp: 
                         print firstAttacker.name +' took '+str(firstPreAtkHP - firstAttacker.hp)+' damage!'
@@ -116,9 +126,17 @@ def hunt(pl):
             #if no moves left, struggle
                 firstPreAtkHP=firstAttacker.hp
                 secondPreAtkHP=secondAttacker.hp
+                castResult = Struggle().cast(firstAttacker, secondAttacker)
+                #rmon gui
+                print 'wild '+rmon.name+'\n'
+                print hpbar(100*(float(rmon.hp)/rmon.stats.stats['hp'])) +'   ('+str(rmon.hp)+')   lvl  '+str(rmon.level)+'\n\n'
+                #player gui
+                print pl.name+"'s "+pl.team[0].name+'\n'
+                print hpbar(100*(float(pl.team[0].hp)/pl.team[0].stats.stats['hp'])) +'   ('+str(pl.team[0].hp)+')   lvl  '+str(pl.team[0].level)+'\n\n'
+                #hit/miss display
                 print firstAttacker.name+' has no moves left!'
                 print firstAttacker.name+' struggles!'
-                if Struggle().cast(firstAttacker, secondAttacker):
+                if castResult:
                     print secondAttacker.name +' took '+str(secondPreAtkHP-secondAttacker.hp)+' damage!'
                     if not firstPreAtkHP == firstAttacker.hp: 
                         print firstAttacker.name +' took '+str(firstPreAtkHP - firstAttacker.hp)+' damage!'        
@@ -218,12 +236,22 @@ def hunt(pl):
             ##
             ##
             if secondAttacker.hp > 0:
+                clear()
                 if secondMoveID != 5:
                 #if at least 1 move with positive PP
-                    print secondAttacker.name+' uses '+secondAttacker.moveset[secondMoveID].name+"!"
                     secondPreAtkHP=secondAttacker.hp
                     firstPreAtkHP=firstAttacker.hp
-                    if secondAttacker.moveset[secondMoveID].cast(secondAttacker, firstAttacker):
+                    castResult=secondAttacker.moveset[secondMoveID].cast(secondAttacker, firstAttacker)
+                    #rmon gui
+                    print 'wild '+rmon.name+'\n'
+                    print hpbar(100*(float(rmon.hp)/rmon.stats.stats['hp'])) +'   ('+str(rmon.hp)+')   lvl  '+str(rmon.level)+'\n\n'
+                    #player gui
+                    print pl.name+"'s "+pl.team[0].name+'\n'
+                    print hpbar(100*(float(pl.team[0].hp)/pl.team[0].stats.stats['hp'])) +'   ('+str(pl.team[0].hp)+')   lvl  '+str(pl.team[0].level)+'\n\n'
+                    #move display
+                    print secondAttacker.name+' uses '+secondAttacker.moveset[secondMoveID].name+"!"
+                    #hit/miss display
+                    if castResult:
                         print firstAttacker.name +' took '+str(firstPreAtkHP-firstAttacker.hp)+' damage!'
                         if not secondPreAtkHP == secondAttacker.hp: 
                             print secondAttacker.name +' took '+str(secondPreAtkHP - secondAttacker.hp)+' damage!'
@@ -233,9 +261,18 @@ def hunt(pl):
                 #if no moves left, struggle
                     secondPreAtkHP=secondAttacker.hp
                     firstPreAtkHP=firstAttacker.hp
+                    castResult = Struggle().cast(secondAttacker, firstAttacker)
+                    #rmon gui
+                    print 'wild '+rmon.name+'\n'
+                    print hpbar(100*(float(rmon.hp)/rmon.stats.stats['hp'])) +'   ('+str(rmon.hp)+')   lvl  '+str(rmon.level)+'\n\n'
+                    #player gui
+                    print pl.name+"'s "+pl.team[0].name+'\n'
+                    print hpbar(100*(float(pl.team[0].hp)/pl.team[0].stats.stats['hp'])) +'   ('+str(pl.team[0].hp)+')   lvl  '+str(pl.team[0].level)+'\n\n'
+                    #move display
                     print secondAttacker.name+' has no moves left!'
                     print secondAttacker.name+' struggles!'
-                    if Struggle().cast(secondAttacker, firstAttacker):
+                    #hit/miss display                    
+                    if castResult:
                         print firstAttacker.name +' took '+str(firstPreAtkHP-firstAttacker.hp)+' damage!'
                         if not secondPreAtkHP == secondAttacker.hp: 
                             print secondAttacker.name +' took '+str(secondPreAtkHP - secondAttacker.hp)+' damage!'        

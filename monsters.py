@@ -644,6 +644,7 @@ class paras(mon):
         self.name=self.__class__.__name__.title()
         self.pokedexid=46
         self.xprate=3
+        self.types=['Bug', 'Grass']
         self.stats.faintxp=70
         self.moveladder={-1:[143]}
         self.wildMovesetFill()

@@ -14,9 +14,10 @@ from party import party
 def mainAct(pl):
     clear()
     choice=pMenu([
-        'hunt','party','heal',      
-        'dex','shop','bank', 'move',
-        pl.name,'save','leave',
+        'hunt','move','heal',
+        'party','shop','dex',
+        'bank', pl.name,'save',
+        'leave',
         ])
     if choice=='hunt':
         if not pl.countawake():
