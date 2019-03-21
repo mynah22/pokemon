@@ -898,7 +898,10 @@ class geodude(mon):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
         self.name=self.__class__.__name__.title()
         self.pokedexid=74
+        self.evolvable=1
+        self.evlvl=25
         self.xprate=2
+        self.types=['Rock', 'Ground']
         self.stats.faintxp=86
         self.moveladder={-1:[143]}
         self.wildMovesetFill()
@@ -907,7 +910,10 @@ class graveler(mon):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
         self.name=self.__class__.__name__.title()
         self.pokedexid=75
+        self.evolvable=1
+        self.evlvl=101
         self.xprate=2
+        self.types=['Rock', 'Ground']
         self.stats.faintxp=134
         self.moveladder={-1:[143]}
         self.wildMovesetFill()
@@ -916,7 +922,9 @@ class golem(mon):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
         self.name=self.__class__.__name__.title()
         self.pokedexid=76
+        self.evolvable=0
         self.xprate=2
+        self.types=['Rock', 'Ground']
         self.stats.faintxp=177
         self.moveladder={-1:[143]}
         self.wildMovesetFill()

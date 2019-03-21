@@ -3,6 +3,9 @@
 	in calcDamage. pass modified values in attack class 
 	cast() method
 
+	*make cast() method pass crit, super effective and other
+	details. 
+
 
 	bulb
 		72		leechseed #status mechanic?
@@ -23,6 +26,12 @@
 	Ratata
 		048	focus energy @23 ###unique crit boost mech
 		#
+
+Battle items:
+	heals
+	pp restore
+	stat mods
+
 
 Monsters:
 	types
@@ -56,7 +65,7 @@ Zones:
 		regions in a zone to unlock the newly accessible borders.)
 
 Trainers:
-	no run
+	cannot escape mech
 	$, remove $ from wild
 	xp boost?
 	ai?

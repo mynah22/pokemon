@@ -31,7 +31,7 @@ fightingEffect={
 fireEffect={
 	'Bug':'super', 'Dragon':'norm', 'Electric':'norm',
 	'Fighting':'norm', 'Fire':'norm', 'Flying':'norm',
-	'Ghost':'norm', 'Grass':'super', 'Ground':'super',
+	'Ghost':'norm', 'Grass':'super', 'Ground':'norm',
 	'Ice':'super', 'Normal':'norm', 'Poison': 'norm',
 	'Psychic':'norm', 'Rock':'nve', 'Water':'nve'
 }
