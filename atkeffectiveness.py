@@ -29,7 +29,7 @@ fightingEffect={
 fireEffect={
     'Bug':'super', 'Dragon':'norm', 'Electric':'norm',
     'Fighting':'norm', 'Fire':'norm', 'Flying':'norm',
-    'Ghost':'norm', 'Grass':'super', 'Ground':'super',
+    'Ghost':'norm', 'Grass':'super', 'Ground':'norm',
     'Ice':'super', 'Normal':'norm', 'Poison': 'norm',
     'Psychic':'norm', 'Rock':'nve', 'Water':'nve'
 }
@@ -103,14 +103,21 @@ waterEffect={
     'Ice':'nve', 'Normal':'norm', 'Poison': 'norm',
     'Psychic':'norm', 'Rock':'super', 'Water':'norm'
 }
-
+noneEffect={
+    'Bug':'norm', 'Dragon':'norm', 'Electric':'norm',
+    'Fighting':'norm', 'Fire':'norm', 'Flying':'norm',
+    'Ghost':'norm', 'Grass':'norm', 'Ground':'norm',
+    'Ice':'norm', 'Normal':'norm', 'Poison': 'norm',
+    'Psychic':'norm', 'Rock':'normr', 'Water':'norm'
+}
 effectiveness={
     'Bug':bugEffect, 'Dragon':dragonEffect, 'Electric':electricEffect,
     'Fighting':fightingEffect, 'Fire':fireEffect, 'Flying':flyingEffect,
     'Ghost':ghostEffect, 'Grass':grassEffect, 'Ground':groundEffect,
     'Ice':iceEffect, 'Normal':normalEffect, 'Poison':poisonEffect,
-    'Psychic':psychicEffect, 'Rock':rockEffect, 'Water':waterEffect
-    }
+    'Psychic':psychicEffect, 'Rock':rockEffect, 'Water':waterEffect,
+    'None':noneEffect
+}
 
 def calcEffect(self, skill, target):
     map=effectiveness[skill.type]
