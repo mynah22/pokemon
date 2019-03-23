@@ -1,90 +1,90 @@
 Monster appearance probability:
-	red/blue modes
-	make pokelist pokedict
-	player.color='Blue'
-	zone.pokedict={
-		'Blue'= [(10, 50, 5, 5),(11, 25, 8, 8),(12, 25, 20,20)]
-		'Red'= [(13, 50, 5, 5),(14, 25, 8, 8),(15, 25, 20,20)]
+    red/blue modes
+    make pokelist pokedict
+    player.color='Blue'
+    zone.pokedict={
+        'Blue'= [(10, 50, 5, 5),(11, 25, 8, 8),(12, 25, 20,20)]
+        'Red'= [(13, 50, 5, 5),(14, 25, 8, 8),(15, 25, 20,20)]
 
-	}
-	pokelist=zone.pokedict[pl.color]
+    }
+    pokelist=zone.pokedict[pl.color]
 
 
 **Exp shar
-	combat split
-	held item split
+    combat split
+    held item split
 
 
 
 ***Attack mechanics:
-	set crit (and accuracy?) to variables w/default values
-	in calcDamage. pass modified values in attack class 
-	cast() method
+    set crit (and accuracy?) to variables w/default values
+    in calcDamage. pass modified values in attack class 
+    cast() method
 
-	*make cast() method pass crit, super effective and other
-	details. 
+    *make cast() method pass crit, super effective and other
+    details. 
 
 
-	bulb
-		72		leechseed #status mechanic?
-		93		poisonpowder #status mechanic
-		101		razorleaf #+crit mech
-		121		sleeppowder #status mechanic
-		126		solarbeam  # 2 move attack mech
-	char
-		39		ember ##status mechanic
-		100		rage  #unique attack-choice lock mech
-		120		slash #crit+ mech
-		45		flamethrower #status mech
-		43		firespin #turn lock mech and target switch
-				lock mech
-	squirt
-		10		bite # flich mech
-		117		skullbash # 2 move mech
-	Ratata
-		048	focus energy @23 ###unique crit boost mech
-		#
+    bulb
+        72      leechseed #status mechanic?
+        93      poisonpowder #status mechanic
+        101     razorleaf #+crit mech
+        121     sleeppowder #status mechanic
+        126     solarbeam  # 2 move attack mech
+    char
+        39      ember ##status mechanic
+        100     rage  #unique attack-choice lock mech
+        120     slash #crit+ mech
+        45      flamethrower #status mech
+        43      firespin #turn lock mech and target switch
+                lock mech
+    squirt
+        10      bite # flich mech
+        117     skullbash # 2 move mech
+    Ratata
+        048 focus energy @23 ###unique crit boost mech
+        #
 
 Battle items:
-	heals
-	pp restore
-	stat mods
+    heals
+    pp restore
+    stat mods
 
 
 Monsters:
-	types
-	move ladders
-	evl lvls
-	base stats
-	TM/HMs
+    types
+    move ladders
+    evl lvls
+    base stats
+    TM/HMs
 
 
 Attacks:
-	type
-	specflag
-	mechanic
-	TM/HMs
-	damage
-	PP
+    type
+    specflag
+    mechanic
+    TM/HMs
+    damage
+    PP
 
 Zones:
-	full zonelist
-	grass pokelists
-	borders
-	surf/fish pokelist
-	cut/strength passage mechanic
-	gyms/pokecenters
-	flyable (indoor) flag
-	trainers*
-	trainer access regions
-		(The idea would be to divide trainers into groups representing 
-		all trainers encounterable at a given stage of the storyline, 
-		and require the CLI player to defeat all trainers in open access
-		regions in a zone to unlock the newly accessible borders.)
+    full zonelist
+    grass pokelists
+    borders
+    surf/fish pokelist
+    cut/strength passage mechanic
+    gyms/pokecenters
+    flyable (indoor) flag
+    trainers*
+    trainer access regions
+        (The idea would be to divide trainers into groups representing 
+        all trainers encounterable at a given stage of the storyline, 
+        and require the CLI player to defeat all trainers in open access
+        regions in a zone to unlock the newly accessible borders.)
 
 Trainers:
-	cannot escape mech
-	$, remove $ from wild
-	xp boost?
-	ai?
-	
+    cannot escape mech
+    $, remove $ from wild
+    xp boost?
+    ai?
+    

@@ -14,6 +14,6 @@ def save(pl):
     xxx=raw_input()
 
 def load():
-	choice = pMenu(listdir('saves/'))
-	with open('saves/'+choice, 'r') as f:
-		return pickle.loads(f.read())
+    choice = pMenu(listdir('saves/'))
+    with open('saves/'+choice, 'r') as f:
+        return pickle.loads(f.read())

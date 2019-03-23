@@ -1,6 +1,6 @@
 class zone:
-	def __init__(self):
-		pass
+    def __init__(self):
+        pass
 PalletTown=zone()
 #id 0
 PalletTown.nullflag=1
@@ -93,20 +93,11 @@ CeruleanCity.borders=[11]
 
 
 
-
-
-
-
-
-
-
-
-
 zonelist= [
-	PalletTown,Route1,ViridianCity,
-	Route22,Route2,ViridianForest,
-	PewterCity,Route3,MtMoon,MtMoonB1,
-	MtMoonB2,Route4,CeruleanCity
+    PalletTown,Route1,ViridianCity,
+    Route22,Route2,ViridianForest,
+    PewterCity,Route3,MtMoon,MtMoonB1,
+    MtMoonB2,Route4,CeruleanCity
 ]
 
 #PalletTown=[129,60,118,72]
