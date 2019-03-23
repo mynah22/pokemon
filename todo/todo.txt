@@ -1,3 +1,21 @@
+Monster appearance probability:
+	red/blue modes
+	make pokelist pokedict
+	player.color='Blue'
+	zone.pokedict={
+		'Blue'= [(10, 50, 5, 5),(11, 25, 8, 8),(12, 25, 20,20)]
+		'Red'= [(13, 50, 5, 5),(14, 25, 8, 8),(15, 25, 20,20)]
+
+	}
+	pokelist=zone.pokedict[pl.color]
+
+
+**Exp shar
+	combat split
+	held item split
+
+
+
 ***Attack mechanics:
 	set crit (and accuracy?) to variables w/default values
 	in calcDamage. pass modified values in attack class 
