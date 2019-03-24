@@ -1,8 +1,6 @@
 class zone:
-	def __init__(self):
-		self.pokelist=[]
-		self.minlvl=1
-		self.maxlvl=12
+    def __init__(self):
+        pass
 PalletTown=zone()
 #id 0
 PalletTown.nullflag=1
@@ -84,20 +82,22 @@ Route4=zone()
 Route4.pokelist=[(19,45,8,12),(21,30,8,12),(23,24,6,12),(27,1,6,12)]
 Route4.name='Route 4'
 Route4.nullflag=0
-Route4.borders=[10]
+Route4.borders=[10,12]
 
 CeruleanCity=zone()
-#id 6
+#id 12
 CeruleanCity.nullflag=1
 CeruleanCity.name= 'Cerulean City'
-PewterCity.borders=[5,7]
+CeruleanCity.borders=[11]
+
+
 
 
 zonelist= [
-	PalletTown,Route1,ViridianCity,
-	Route22,Route2,ViridianForest,
-	PewterCity,Route3,MtMoon,MtMoonB1,
-	MtMoonB2,Route4,CeruleanCity
+    PalletTown,Route1,ViridianCity,
+    Route22,Route2,ViridianForest,
+    PewterCity,Route3,MtMoon,MtMoonB1,
+    MtMoonB2,Route4,CeruleanCity
 ]
 
 #PalletTown=[129,60,118,72]

@@ -26,4 +26,4 @@ class player:
         return awakePokes
 
     def countawake(self):
-    	return len(self.awakeList())
+        return len(self.awakeList())

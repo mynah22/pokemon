@@ -5,6 +5,14 @@ from attacks import attackClasses
 
 class mon(object):
     def __init__(self, name='MissingNo.', lvl=5, base=[50,50,50,50,50,50],xpr=3):
+        self.status={
+            'poisoned':False,
+            'burned':False,
+            'frozen':False,
+            'asleep':False,
+            'paralyzed':False
+        }
+        self.catchRate=150
         self.name=name
         self.level = lvl
         self.xprate=xpr
@@ -25,25 +33,39 @@ class mon(object):
         self.calcAllStats()
         self.hp=int(self.stats.stats['hp'])
         self.types=['Normal']
-   
     def calcAllStats(self):
         for st in self.stats.statNames:
             if st=='hp':
                 self.stats.calchp(self.level)
             else:
                 self.stats.calcstat(st,self.level)
-
-
-    def attack(self, target):
-        if roll(60):
-            dmg=self.stats.stats['atk']
-            dmg-=target.stats.stats['def']/1.25
-            dmg+=1
-            if dmg < 0:
-                dmg = 0
-            target.hp-=int(dmg)
-            if target.hp<0:
-                target.hp=0
+    def statStageCoefficient(self, statStage):
+        if statStage == -6:
+            return 0.25
+        if statStage == -5:
+            return 0.28
+        if statStage == -4:
+            return 0.33
+        if statStage == -3:
+            return 0.40
+        if statStage == -2:
+            return 0.50
+        if statStage == -1:
+            return 0.66
+        if statStage == 0:
+            return 1
+        if statStage == 1:
+            return 1.5
+        if statStage == 2:
+            return 2
+        if statStage == 3:
+            return 2.5
+        if statStage == 4:
+            return 3
+        if statStage == 5:
+            return 3.5
+        if statStage == 6:
+            return 4
     def wildAttack(self):
         usableAtks=[]
         for movekey in self.moveset:
@@ -53,12 +75,10 @@ class mon(object):
             return 5
         else:
             return usableAtks[rrang(len(usableAtks))]
-    def caught(self, pl):
-        print self.name+' was caught!\n\n'     
+    def caught(self, pl):    
         pl.dex.icn[self.pokedexid][0]=2
         if len(pl.team)<6:
             pl.team.append(self)
-            xxx=raw_input('press enter')
         else:
             print 'Party full.'
             print self.name+'sent to bank.'                        
@@ -88,7 +108,6 @@ class mon(object):
         for moveid in movelist:
              self.moveset[c]=attackClasses[moveid]()
              c+=1
-
 
 class bulbasaur(mon):
     def __init__(self, lvl=5):
@@ -631,6 +650,7 @@ class paras(mon):
         self.name=self.__class__.__name__.title()
         self.pokedexid=46
         self.xprate=3
+        self.types=['Bug', 'Grass']
         self.stats.faintxp=70
         self.moveladder={-1:[143]}
         self.wildMovesetFill()
@@ -884,7 +904,10 @@ class geodude(mon):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
         self.name=self.__class__.__name__.title()
         self.pokedexid=74
+        self.evolvable=1
+        self.evlvl=25
         self.xprate=2
+        self.types=['Rock', 'Ground']
         self.stats.faintxp=86
         self.moveladder={-1:[143]}
         self.wildMovesetFill()
@@ -893,7 +916,10 @@ class graveler(mon):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
         self.name=self.__class__.__name__.title()
         self.pokedexid=75
+        self.evolvable=1
+        self.evlvl=101
         self.xprate=2
+        self.types=['Rock', 'Ground']
         self.stats.faintxp=134
         self.moveladder={-1:[143]}
         self.wildMovesetFill()
@@ -902,7 +928,9 @@ class golem(mon):
         super(self.__class__, self).__init__(lvl=lvl, base=[45,49,49,65,65,45],xpr=2)
         self.name=self.__class__.__name__.title()
         self.pokedexid=76
+        self.evolvable=0
         self.xprate=2
+        self.types=['Rock', 'Ground']
         self.stats.faintxp=177
         self.moveladder={-1:[143]}
         self.wildMovesetFill()
