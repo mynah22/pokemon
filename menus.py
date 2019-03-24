@@ -52,7 +52,6 @@ def pbMenu(player):
             fin=1         
     return mendic[int(inp)]
 
-
 def bankMenu(pl, mode='d'):
     numb=1
     if mode.lower()=='d':
@@ -80,7 +79,7 @@ def bankMenu(pl, mode='d'):
     return target[int(inp)-1]
 
 def swapMen(pl):
-# clear()
+    # clear()
     print "Select lead pokemon:"
     numb=1
     pokemap=[]
@@ -103,7 +102,6 @@ def swapMen(pl):
     else:
         fin=1         
     return pokemap[t-1]
-
 
 def atkMenu(castingMon):
     #returns the dict key that corresponds to the selected move.

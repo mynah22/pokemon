@@ -2,7 +2,7 @@ from time import time
 from monsters import pokeclasses
 from clear import clear
 from menus import *
-from roll import *
+from roll import roll, rrang, riv, pokeselect
 
 from zones import zonelist
 

@@ -1,13 +1,13 @@
-from monsters import *
+from monsters import pokeclasses
 from menus import *
-from player import *
+from player import player
 from hunt import hunt
 from clear import clear
 from shop import shop
 from heal import heal
-from save import *
+from save import save,load
 from bank import bank
-from dex import *
+from dex import dexui,pokedex
 from move import move
 from party import party
 

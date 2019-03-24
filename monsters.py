@@ -1,4 +1,4 @@
-from roll import *
+from roll import roll, rrang, riv, pokeselect
 from stats import statholder
 from xpmap import lvlxpcalc
 from attacks import attackClasses
