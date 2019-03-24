@@ -1,3 +1,14 @@
+R/B/Y:
+    mon prob
+    4 mon catch prob diff:
+        pikachu
+        kadabra
+        dragonaire
+        dragonite
+
+
+
+
 Monster appearance probability:
     red/blue modes
     make pokelist pokedict

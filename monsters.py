@@ -5,6 +5,14 @@ from attacks import attackClasses
 
 class mon(object):
     def __init__(self, name='MissingNo.', lvl=5, base=[50,50,50,50,50,50],xpr=3):
+        self.status={
+            'poisoned':False,
+            'burned':False,
+            'frozen':False,
+            'asleep':False,
+            'paralyzed':False
+        }
+        self.catchRate=150
         self.name=name
         self.level = lvl
         self.xprate=xpr
@@ -67,12 +75,10 @@ class mon(object):
             return 5
         else:
             return usableAtks[rrang(len(usableAtks))]
-    def caught(self, pl):
-        print self.name+' was caught!\n\n'     
+    def caught(self, pl):    
         pl.dex.icn[self.pokedexid][0]=2
         if len(pl.team)<6:
             pl.team.append(self)
-            xxx=raw_input('press enter')
         else:
             print 'Party full.'
             print self.name+'sent to bank.'                        

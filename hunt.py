@@ -6,6 +6,8 @@ from roll import *
 from swap import *
 from zones import zonelist
 from attacks import Struggle
+from catch import catch
+from time import sleep
 
 def hpbar(per=50):
     if per < 1:
@@ -58,7 +60,7 @@ def hunt(pl):
     while not encfin:
         clear()
         #monster appears
-#        print 'Wild '+rmon.name+' appears!\n'
+        #print 'Wild '+rmon.name+' appears!\n'
         #monster gui
         print 'wild '+rmon.name+'\n'
         print hpbar(100*(float(rmon.hp)/rmon.stats.stats['hp'])) +'   ('+str(rmon.hp)+')   lvl  '+str(rmon.level)+'\n\n'
@@ -67,7 +69,6 @@ def hunt(pl):
         print hpbar(100*(float(pl.team[0].hp)/pl.team[0].stats.stats['hp'])) +'   ('+str(pl.team[0].hp)+')   lvl  '+str(pl.team[0].level)+'\n\n'
         
         inp=pMenu(huntMen)
-        
         #if user selection = attack
         if inp=='attack':
             #move select phase
@@ -369,39 +370,64 @@ def hunt(pl):
                     xxx=raw_input('\npress enter')
                     encfin=True
 
-
-
         if inp.startswith('swap'):
             pl.team.head(pl.team.index(swapMen(pl)))
 
-
-
         if inp=='catch':
             clear() 
-            print pl.team[0].name+'  '+str(pl.team[0].hp)
-            print rmon.name+'  '+str(rmon.hp)
+            print rmon.name+'  '+str(rmon.hp)+'/'+str(rmon.stats.stats['hp'])
+            for status in rmon.status:
+                if rmon.status[status]:
+                    print status
             ball=pbMenu(pl)
             if ball:
                 pl.balls[ball]-=1
-                if ball=='pb':   
-                    if roll(20):
-                        rmon.caught(pl)  
-                        pl.dex.caught(rmon)                          
-                        encfin=True
-                if ball=='gb':
-                    if roll(30):
-                        rmon.caught(pl)
-                        pl.dex.caught(rmon)                           
-                        encfin=True
-                if ball=='ub':
-                    if roll(40):
-                        rmon.caught(pl)
-                        pl.dex.caught(rmon)                            
-                        encfin=True           
-                            
-
-
-
+                caughtTup=catch(rmon, pl, ball)
+                #if capture fails
+                if not caughtTup[0]:
+                    if not caughtTup[1]:
+                        pass
+                    elif caughtTup[1]==1:
+                        print rmon.name+' resists...'
+                        sleep(1)
+                    elif caughtTup[1]==2:
+                        print rmon.name+' resists...'
+                        sleep(1)
+                        print rmon.name+' resists...'
+                        sleep(1)
+                    elif caughtTup[1]>2:
+                        print rmon.name+' resists...'
+                        sleep(1)
+                        print rmon.name+' resists...'
+                        sleep(1)
+                        print rmon.name+' resists...'
+                        sleep(1)        
+                    print rmon.name+' escaped!'
+                    inp=raw_input('press enter...')
+                #if capture succeeds
+                if caughtTup[0]:
+                    if not caughtTup[1]:
+                        pass
+                    elif caughtTup[1]==1:
+                        print rmon.name+' resists...'
+                        sleep(1)
+                    elif caughtTup[1]==2:
+                        print rmon.name+' resists...'
+                        sleep(1)
+                        print rmon.name+' resists...'
+                        sleep(1)
+                    elif caughtTup[1]>2:
+                        print rmon.name+' resists...'
+                        sleep(1)
+                        print rmon.name+' resists...'
+                        sleep(1)
+                        print rmon.name+' resists...'
+                        sleep(1)
+                    print rmon.name+' was captured!!'
+                    rmon.caught(pl)  
+                    pl.dex.caught(rmon) 
+                    inp=raw_input('press enter...')                         
+                    encfin=True
         if inp=='run':
             clear()
             print pl.name+' got away safely!'
