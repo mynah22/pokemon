@@ -1,26 +1,26 @@
 def pMenu(tarmen):
     numb=1
     for item in tarmen:
-       if numb<10:
-          print str(numb)+':   '+item
-          numb+=1
-       else:
-          print str(numb)+':  '+item
-          numb+=1
+        if numb<10:
+            print str(numb)+':   '+item
+            numb+=1
+        else:
+            print str(numb)+':  '+item
+            numb+=1
     fin=0
     while fin != 1:
-       inval=0
-       inp=raw_input('enter menu #:')
-       try: 
-           t=int(inp)
-           if t<1 or t>len(tarmen):
-               inval=1
-       except:
-           inval=1
-       if inval==1:
-           print 'invalid selection.\n'
-       else:
-           fin=1         
+        inval=0
+        inp=raw_input('enter menu #:')
+        try: 
+            t=int(inp)
+            if t<1 or t>len(tarmen):
+                inval=1
+        except:
+            inval=1
+        if inval==1:
+            print 'invalid selection.\n'
+        else:
+            fin=1         
     return tarmen[int(inp)-1]
 
 def pbMenu(player):
@@ -38,71 +38,71 @@ def pbMenu(player):
     else:
         fin=0
     while fin != 1:
-       inval=0
-       inp=raw_input('enter menu #:')
-       try: 
-           t=int(inp)
-           if t<1 or t>len(mendic):
-               inval=1
-       except:
-           inval=1
-       if inval==1:
-           print 'invalid selection.\n'
-       else:
-           fin=1         
+        inval=0
+        inp=raw_input('enter menu #:')
+        try: 
+            t=int(inp)
+            if t<1 or t>len(mendic):
+                inval=1
+        except:
+            inval=1
+        if inval==1:
+            print 'invalid selection.\n'
+        else:
+            fin=1         
     return mendic[int(inp)]
 
 
 def bankMenu(pl, mode='d'):
     numb=1
     if mode.lower()=='d':
-      target=pl.team
+        target=pl.team
     elif mode.lower()=='w':
-      target=pl.bank
+        target=pl.bank
 
     for poke in target:
         print str(numb)+':   '+poke.name
         numb+=1
     fin=0
     while fin != 1:
-       inval=0
-       inp=raw_input('enter menu #:')
-       try: 
-           t=int(inp)
-           if t<1 or t>len(target):
-               inval=1
-       except:
-           inval=1
-       if inval==1:
-           print 'invalid selection.\n'
-       else:
-           fin=1         
+        inval=0
+        inp=raw_input('enter menu #:')
+        try: 
+            t=int(inp)
+            if t<1 or t>len(target):
+                inval=1
+        except:
+            inval=1
+        if inval==1:
+            print 'invalid selection.\n'
+        else:
+            fin=1         
     return target[int(inp)-1]
 
 def swapMen(pl):
 # clear()
-  print "Select lead pokemon:"
-  numb=1
-  pokemap=[]
-  for poke in pl.awakeList():
-      print str(numb)+':   '+poke.name+' ('+str(poke.hp)+')'
-      numb+=1
-      pokemap.append(poke)
-  fin=0
-  while fin != 1:
-     inval=0
-     inp=raw_input('enter menu #:')
-     try: 
-         t=int(inp)
-         if t<1 or t>len(pokemap):
-             inval=1
-     except:
-         inval=1
-     if inval==1:
-         print 'invalid selection.\n'
-     else:
-         fin=1         
-  return pokemap[t-1]
+    print "Select lead pokemon:"
+    numb=1
+    pokemap=[]
+    for poke in pl.awakeList():
+        print str(numb)+':   '+poke.name+' ('+str(poke.hp)+')'
+        numb+=1
+        pokemap.append(poke)
+    fin=0
+    while fin != 1:
+        inval=0
+        inp=raw_input('enter menu #:')
+        try: 
+            t=int(inp)
+            if t<1 or t>len(pokemap):
+                inval=1
+        except:
+            inval=1
+    if inval==1:
+        print 'invalid selection.\n'
+    else:
+        fin=1         
+    return pokemap[t-1]
 
 
 def atkMenu(castingMon):
@@ -111,29 +111,29 @@ def atkMenu(castingMon):
     numb=1
     usableAtks=[]
     for movekey in castingMon.moveset:
-      if castingMon.moveset[movekey]:
-        if castingMon.moveset[movekey].remainingUsagePoints:
-          usableAtks.append(movekey)
+        if castingMon.moveset[movekey]:
+            if castingMon.moveset[movekey].remainingUsagePoints:
+                usableAtks.append(movekey)
     if len(usableAtks)<1: 
-      return 5
-      #returns 5 if no moves available
+        return 5
+        #returns 5 if no moves available
     for moveID in usableAtks:
-      move = castingMon.moveset[moveID]
-      print str(moveID+1)+':  '+move.name+'   '+str(move.remainingUsagePoints)+'/'+str(move.maxUsagePoints)
+        move = castingMon.moveset[moveID]
+        print str(moveID+1)+':  '+move.name+'   '+str(move.remainingUsagePoints)+'/'+str(move.maxUsagePoints)
     fin=0
     while fin != 1:
-       inval=0
-       inp=raw_input('enter menu #:')
-       try: 
-           t=int(inp)
-           if t<1 or not usableAtks.count(t-1):
-               inval=1
-       except:
-           inval=1
-       if inval==1:
-           print 'invalid selection.\n'
-       else:
-           fin=1         
+        inval=0
+        inp=raw_input('enter menu #:')
+        try: 
+            t=int(inp)
+            if t<1 or not usableAtks.count(t-1):
+                inval=1
+        except:
+            inval=1
+        if inval==1:
+            print 'invalid selection.\n'
+        else:
+            fin=1         
     return int(inp)-1
     #returns the dict key that corresponds to the selected move.
     #returns 5 if no moves available
