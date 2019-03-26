@@ -68,7 +68,7 @@ Monsters:
     evl lvls
     base stats
     TM/HMs
-
+    catch rate
 
 Attacks:
     type

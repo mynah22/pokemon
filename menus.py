@@ -97,10 +97,10 @@ def swapMen(pl):
                 inval=1
         except:
             inval=1
-    if inval==1:
-        print 'invalid selection.\n'
-    else:
-        fin=1         
+        if inval==1:
+            print 'invalid selection.\n'
+        else:
+            fin=1         
     return pokemap[t-1]
 
 def atkMenu(castingMon):
@@ -117,14 +117,14 @@ def atkMenu(castingMon):
         #returns 5 if no moves available
     for moveID in usableAtks:
         move = castingMon.moveset[moveID]
-        print str(moveID+1)+':  '+move.name+'   '+str(move.remainingUsagePoints)+'/'+str(move.maxUsagePoints)
+        print str(moveID)+':  '+move.name+'   '+str(move.remainingUsagePoints)+'/'+str(move.maxUsagePoints)
     fin=0
     while fin != 1:
         inval=0
         inp=raw_input('enter menu #:')
         try: 
             t=int(inp)
-            if t<1 or not usableAtks.count(t-1):
+            if t<1 or not usableAtks.count(t):
                 inval=1
         except:
             inval=1
@@ -132,7 +132,7 @@ def atkMenu(castingMon):
             print 'invalid selection.\n'
         else:
             fin=1         
-    return int(inp)-1
+    return int(inp)
     #returns the dict key that corresponds to the selected move.
     #returns 5 if no moves available
 

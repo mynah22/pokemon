@@ -1,4 +1,4 @@
-from roll import roll, rrang, riv, pokeselect
+from roll import roll, rrang, riv, pokeSelect
 from stats import statholder
 from xpmap import lvlxpcalc
 from attacks import attackClasses
@@ -104,7 +104,7 @@ class mon(object):
             for move in self.moveladder[key]:
                 movelist.append(move)
         movelist=movelist[-4:]
-        c=0
+        c=1
         for moveid in movelist:
              self.moveset[c]=attackClasses[moveid]()
              c+=1
