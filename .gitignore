@@ -1,5 +1,5 @@
 # Specify filepatterns you want git to ignore.
-saves/*
+saves/Wm
 *.pyc
 scratch.txt
 sratch.txt
