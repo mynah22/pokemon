@@ -49,7 +49,7 @@ class statholder(object):
                 self.stats.calchp(a.self)
             else:
                 self.stats.calcstat(s,a.self)
-        print self.stats.stats
+        print(self.stats.stats)
 #       return ((((self.base[st]+self.iv[st])*2+(sqrt(self.ev[st])/4))*lvl)/100)+5
 
 #   def calciv(self, level, stat, base, ev=0, p=1.0):

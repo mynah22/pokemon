@@ -11,7 +11,7 @@ def bank(pl):
             ])
         if mode=='deposit':
             clear()
-            print 'Deposit Menu \n\n'
+            print('Deposit Menu \n\n')
             choice=bankMenu(pl)
             pl.bank.append(choice)
             pl.team.remove(choice)
@@ -19,11 +19,11 @@ def bank(pl):
             xxx=raw_input(choice.name+' deposited!')
         if mode=='withdraw':
             if len(pl.team)>5:
-                print '\n\nyour party is full!'
+                print('\n\nyour party is full!')
                 xxx=raw_input()
             else:
                 clear()
-                print 'Withdrawl Menu \n\n'
+                print('Withdrawl Menu \n\n')
                 choice=bankMenu(pl, 'w')
                 pl.bank.remove(choice)
                 pl.team.append(choice)

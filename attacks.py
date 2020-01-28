@@ -393,7 +393,7 @@ class Bubble(attack):
             target.hp-=self.calcDamage(user, target)
             if target.stats.combatStages['speed'] > -6 and roll(30):
                 target.stats.combatStages['speed'] -= 1
-                print target.name+' slowed down!'
+                print(target.name+' slowed down!')
             return 1
         else:
             return 0

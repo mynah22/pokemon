@@ -22,21 +22,21 @@ def mainAct(pl):
     if choice=='hunt':
         if not pl.countawake():
             clear()
-            print pl.name+' is out of usable pokemon!'
-            xxx=raw_input('\n\npress enter')
+            print(pl.name+' is out of usable pokemon!')
+            xxx=input('\n\npress enter')
         else:
             hunt(pl)
     if choice=='party':
         party(pl)
     if choice==pl.name:
         clear()
-        print 'Status\n\n'
-        print pl.name+'   $'+str(pl.money)
+        print('Status\n\n')
+        print(pl.name+'   $'+str(pl.money))
         for bt in pl.balls:
             if pl.balls[bt]>0:
-                print bt+': '+str(pl.balls[bt])
-        print '\n'
-        raw_input('enter to return')
+                print(bt+': '+str(pl.balls[bt]))
+        print('\n')
+        input('enter to return')
         return 0
     if choice=='shop':
         shop(pl)    
@@ -56,7 +56,7 @@ def mainAct(pl):
 
 def starter(player):
     clear()
-    print 'New Game\n\n'
+    print('New Game\n\n')
     choice=pMenu(starterMen)
     if choice.startswith('B'):
         player.team.append(pokeclasses[0]())
@@ -78,8 +78,8 @@ def startAct():
         choice=pMenu(startMen)
         if choice=='new':
             clear()
-            print 'New Game\n\n'
-            p=player(raw_input('enter name:'))
+            print('New Game\n\n')
+            p=player(input('enter name:'))
             starter(p)
             selected=True
         if choice=='load':

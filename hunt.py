@@ -3,7 +3,7 @@ from monsters import pokeclasses
 from clear import clear
 from menus import *
 from roll import roll, rrang, riv, pokeSelect
-from swap import *
+#from swap import *
 from zones import zonelist
 from attacks import Struggle
 from catch import catch
@@ -37,8 +37,8 @@ def hunt(pl):
     zone = zonelist[pl.zone] # get player zone
     clear()
     if zone.nullflag:
-        print 'No monsters here! Move somewhere else.'
-        inp = raw_input('Press any key...')
+        print('No monsters here! Move somewhere else.')
+        inp = input('Press any key...')
         return
     selectedTup=pokeSelect(zone.pokelist)
     #tup[]: 0-id, 1-encounter chance, 2-low lvl, 3-high lvl
@@ -62,11 +62,11 @@ def hunt(pl):
         #monster appears
         #print 'Wild '+rmon.name+' appears!\n'
         #monster gui
-        print 'wild '+rmon.name+'\n'
-        print hpbar(100*(float(rmon.hp)/rmon.stats.stats['hp'])) +'   ('+str(rmon.hp)+')   lvl  '+str(rmon.level)+'\n\n'
+        print('wild '+rmon.name+'\n')
+        print(hpbar(100*(float(rmon.hp)/rmon.stats.stats['hp'])) +'   ('+str(rmon.hp)+')   lvl  '+str(rmon.level)+'\n\n')
         #player gui
-        print pl.name+"'s "+pl.team[0].name+'\n'
-        print hpbar(100*(float(pl.team[0].hp)/pl.team[0].stats.stats['hp'])) +'   ('+str(pl.team[0].hp)+')   lvl  '+str(pl.team[0].level)+'\n\n'
+        print(pl.name+"'s "+pl.team[0].name+'\n')
+        print(hpbar(100*(float(pl.team[0].hp)/pl.team[0].stats.stats['hp'])) +'   ('+str(pl.team[0].hp)+')   lvl  '+str(pl.team[0].level)+'\n\n')
         
         inp=pMenu(huntMen)
         #if user selection = attack
@@ -109,41 +109,41 @@ def hunt(pl):
                 secondPreAtkHP=secondAttacker.hp
                 castResult= firstAttacker.moveset[firstMoveID].cast(firstAttacker, secondAttacker) 
                 #rmon gui
-                print 'wild '+rmon.name+'\n'
-                print hpbar(100*(float(rmon.hp)/rmon.stats.stats['hp'])) +'   ('+str(rmon.hp)+')   lvl  '+str(rmon.level)+'\n\n'
+                print('wild '+rmon.name+'\n')
+                print(hpbar(100*(float(rmon.hp)/rmon.stats.stats['hp'])) +'   ('+str(rmon.hp)+')   lvl  '+str(rmon.level)+'\n\n')
                 #player gui
-                print pl.name+"'s "+pl.team[0].name+'\n'
-                print hpbar(100*(float(pl.team[0].hp)/pl.team[0].stats.stats['hp'])) +'   ('+str(pl.team[0].hp)+')   lvl  '+str(pl.team[0].level)+'\n\n'
+                print(pl.name+"'s "+pl.team[0].name+'\n')
+                print(hpbar(100*(float(pl.team[0].hp)/pl.team[0].stats.stats['hp'])) +'   ('+str(pl.team[0].hp)+')   lvl  '+str(pl.team[0].level)+'\n\n')
                 #move display
-                print firstAttacker.name+' uses '+firstAttacker.moveset[firstMoveID].name+"!"
+                print(firstAttacker.name+' uses '+firstAttacker.moveset[firstMoveID].name+"!")
                 #hit/miss display
                 if castResult:
-                    print secondAttacker.name +' took '+str(secondPreAtkHP-secondAttacker.hp)+' damage!'
+                    print(secondAttacker.name +' took '+str(secondPreAtkHP-secondAttacker.hp)+' damage!')
                     if not firstPreAtkHP == firstAttacker.hp: 
-                        print firstAttacker.name +' took '+str(firstPreAtkHP - firstAttacker.hp)+' damage!'
+                        print(firstAttacker.name +' took '+str(firstPreAtkHP - firstAttacker.hp)+' damage!')
                 else:
-                    print firstAttacker.name+' missed!'                
+                    print(firstAttacker.name+' missed!')
             elif atkid == 5:
             #if no moves left, struggle
                 firstPreAtkHP=firstAttacker.hp
                 secondPreAtkHP=secondAttacker.hp
                 castResult = Struggle().cast(firstAttacker, secondAttacker)
                 #rmon gui
-                print 'wild '+rmon.name+'\n'
-                print hpbar(100*(float(rmon.hp)/rmon.stats.stats['hp'])) +'   ('+str(rmon.hp)+')   lvl  '+str(rmon.level)+'\n\n'
+                print('wild '+rmon.name+'\n')
+                print(hpbar(100*(float(rmon.hp)/rmon.stats.stats['hp'])) +'   ('+str(rmon.hp)+')   lvl  '+str(rmon.level)+'\n\n')
                 #player gui
-                print pl.name+"'s "+pl.team[0].name+'\n'
-                print hpbar(100*(float(pl.team[0].hp)/pl.team[0].stats.stats['hp'])) +'   ('+str(pl.team[0].hp)+')   lvl  '+str(pl.team[0].level)+'\n\n'
+                print(pl.name+"'s "+pl.team[0].name+'\n')
+                print(hpbar(100*(float(pl.team[0].hp)/pl.team[0].stats.stats['hp'])) +'   ('+str(pl.team[0].hp)+')   lvl  '+str(pl.team[0].level)+'\n\n')
                 #hit/miss display
-                print firstAttacker.name+' has no moves left!'
-                print firstAttacker.name+' struggles!'
+                print(firstAttacker.name+' has no moves left!')
+                print(firstAttacker.name+' struggles!')
                 if castResult:
-                    print secondAttacker.name +' took '+str(secondPreAtkHP-secondAttacker.hp)+' damage!'
+                    print(secondAttacker.name +' took '+str(secondPreAtkHP-secondAttacker.hp)+' damage!')
                     if not firstPreAtkHP == firstAttacker.hp: 
-                        print firstAttacker.name +' took '+str(firstPreAtkHP - firstAttacker.hp)+' damage!'        
+                        print(firstAttacker.name +' took '+str(firstPreAtkHP - firstAttacker.hp)+' damage!')
                 else:
-                    print firstAttacker.name+' missed!'  
-            wait=raw_input('press enter...')
+                    print(firstAttacker.name+' missed!')
+            wait=input('press enter...')
             ##
             ########## after atk eval
             ##
@@ -162,13 +162,13 @@ def hunt(pl):
                     else:
                         pl.team[0].stats.ev[stat]=100
                 #display
-                print rmon.name+' K.O.'
+                print(rmon.name+' K.O.')
                 #add xp
                 if pl.team[0].level<100:    
                     xpg = (rmon.stats.faintxp*rmon.level)/7
                     pl.team[0].xp+=xpg
-                    print pl.team[0].name+' Gained '+str(xpg)+'xp!'
-                    print str(pl.team[0].xp)+' / '+str(pl.team[0].nextxp) +' ('+str(pl.team[0].nextxp-pl.team[0].xp)+'   remaining) '
+                    print(pl.team[0].name+' Gained '+str(xpg)+'xp!')
+                    print(str(pl.team[0].xp)+' / '+str(pl.team[0].nextxp) +' ('+str(pl.team[0].nextxp-pl.team[0].xp)+'   remaining) ')
                     #level up process
                     while pl.team[0].xp >= pl.team[0].nextxp and pl.team[0].level<100:
                         pl.team[0].level += 1
@@ -184,11 +184,11 @@ def hunt(pl):
                             else:
                                 pl.team[0].stats.calcstat(stat, pl.team[0].level)
                         pl.team[0].wildMovesetFill()
-                        print pl.team[0].name+' grew to level '+str(pl.team[0].level)+'!'
+                        print(pl.team[0].name+' grew to level '+str(pl.team[0].level)+'!')
                     #evolve process
                     if pl.team[0].evolvable:
                         if pl.team[0].level>=pl.team[0].evlvl:
-                            print pl.team[0].name +' has evolved into '+pokeclasses[pl.team[0].pokedexid]().name+'!'
+                            print(pl.team[0].name +' has evolved into '+pokeclasses[pl.team[0].pokedexid]().name+'!')
                             tmpevmon = pokeclasses[pl.team[0].pokedexid]()
                             pl.dex.caught(tmpevmon)
                             tmpevmon.xp = pl.team[0].xp
@@ -206,8 +206,8 @@ def hunt(pl):
                 #$$$$$ boieeee
                 reward=rrang(1000)
                 pl.money+=reward
-                print pl.name+' found $'+str(reward)+'!\n'
-                raw_input('press return')
+                print(pl.name+' found $'+str(reward)+'!\n')
+                input('press return')
                 #break loop
                 encfin=True
             
@@ -216,21 +216,21 @@ def hunt(pl):
                 clear()
                 #if player has usable monsters
                 if pl.countawake():
-                    print pl.name+"'s "+pl.team[0].name+' K.O.!'
-                    xxx=raw_input('\npress enter')
+                    print(pl.name+"'s "+pl.team[0].name+' K.O.!')
+                    xxx=input('\npress enter')
                     pl.team.head(pl.team.index(swapMen(pl)))
-                    print 'keep fighing '+rmon.name+'?'
+                    print('keep fighing '+rmon.name+'?')
                     swapch=pMenu(binMen)
                     if swapch=='yes':
                         pass
                     elif swapch=='no':
-                        print pl.name+' got away safely!'
-                        xxx=raw_input('\npress enter')
+                        print(pl.name+' got away safely!')
+                        xxx=input('\npress enter')
                         encfin=True
                 #blackout if no monsters usable
                 else:
-                    print pl.name+' is out of usable pokemon!'
-                    xxx=raw_input('\npress enter')
+                    print(pl.name+' is out of usable pokemon!')
+                    xxx=input('\npress enter')
                     encfin=True
             ##########
             #second atk
@@ -244,42 +244,42 @@ def hunt(pl):
                     firstPreAtkHP=firstAttacker.hp
                     castResult=secondAttacker.moveset[secondMoveID].cast(secondAttacker, firstAttacker)
                     #rmon gui
-                    print 'wild '+rmon.name+'\n'
-                    print hpbar(100*(float(rmon.hp)/rmon.stats.stats['hp'])) +'   ('+str(rmon.hp)+')   lvl  '+str(rmon.level)+'\n\n'
+                    print('wild '+rmon.name+'\n')
+                    print(hpbar(100*(float(rmon.hp)/rmon.stats.stats['hp'])) +'   ('+str(rmon.hp)+')   lvl  '+str(rmon.level)+'\n\n')
                     #player gui
-                    print pl.name+"'s "+pl.team[0].name+'\n'
-                    print hpbar(100*(float(pl.team[0].hp)/pl.team[0].stats.stats['hp'])) +'   ('+str(pl.team[0].hp)+')   lvl  '+str(pl.team[0].level)+'\n\n'
+                    print(pl.name+"'s "+pl.team[0].name+'\n')
+                    print(hpbar(100*(float(pl.team[0].hp)/pl.team[0].stats.stats['hp'])) +'   ('+str(pl.team[0].hp)+')   lvl  '+str(pl.team[0].level)+'\n\n')
                     #move display
-                    print secondAttacker.name+' uses '+secondAttacker.moveset[secondMoveID].name+"!"
+                    print(secondAttacker.name+' uses '+secondAttacker.moveset[secondMoveID].name+"!")
                     #hit/miss display
                     if castResult:
-                        print firstAttacker.name +' took '+str(firstPreAtkHP-firstAttacker.hp)+' damage!'
+                        print(firstAttacker.name +' took '+str(firstPreAtkHP-firstAttacker.hp)+' damage!')
                         if not secondPreAtkHP == secondAttacker.hp: 
-                            print secondAttacker.name +' took '+str(secondPreAtkHP - secondAttacker.hp)+' damage!'
+                            print(secondAttacker.name +' took '+str(secondPreAtkHP - secondAttacker.hp)+' damage!')
                     else:
-                        print secondAttacker.name+' missed!'                
+                        print(secondAttacker.name+' missed!')
                 elif atkid == 5:
                 #if no moves left, struggle
                     secondPreAtkHP=secondAttacker.hp
                     firstPreAtkHP=firstAttacker.hp
                     castResult = Struggle().cast(secondAttacker, firstAttacker)
                     #rmon gui
-                    print 'wild '+rmon.name+'\n'
-                    print hpbar(100*(float(rmon.hp)/rmon.stats.stats['hp'])) +'   ('+str(rmon.hp)+')   lvl  '+str(rmon.level)+'\n\n'
+                    print('wild '+rmon.name+'\n')
+                    print(hpbar(100*(float(rmon.hp)/rmon.stats.stats['hp'])) +'   ('+str(rmon.hp)+')   lvl  '+str(rmon.level)+'\n\n')
                     #player gui
-                    print pl.name+"'s "+pl.team[0].name+'\n'
-                    print hpbar(100*(float(pl.team[0].hp)/pl.team[0].stats.stats['hp'])) +'   ('+str(pl.team[0].hp)+')   lvl  '+str(pl.team[0].level)+'\n\n'
+                    print(pl.name+"'s "+pl.team[0].name+'\n')
+                    print(hpbar(100*(float(pl.team[0].hp)/pl.team[0].stats.stats['hp'])) +'   ('+str(pl.team[0].hp)+')   lvl  '+str(pl.team[0].level)+'\n\n')
                     #move display
-                    print secondAttacker.name+' has no moves left!'
-                    print secondAttacker.name+' struggles!'
+                    print(secondAttacker.name+' has no moves left!')
+                    print(secondAttacker.name+' struggles!')
                     #hit/miss display                    
                     if castResult:
-                        print firstAttacker.name +' took '+str(firstPreAtkHP-firstAttacker.hp)+' damage!'
+                        print(firstAttacker.name +' took '+str(firstPreAtkHP-firstAttacker.hp)+' damage!')
                         if not secondPreAtkHP == secondAttacker.hp: 
-                            print secondAttacker.name +' took '+str(secondPreAtkHP - secondAttacker.hp)+' damage!'        
+                            print(secondAttacker.name +' took '+str(secondPreAtkHP - secondAttacker.hp)+' damage!')
                     else:
-                        print secondAttacker.name+' missed!'  
-                wait=raw_input('press enter...')
+                        print(secondAttacker.name+' missed!')
+                wait=input('press enter...')
             ##
             ##Attacks over
             ##
@@ -299,13 +299,13 @@ def hunt(pl):
                         else:
                             pl.team[0].stats.ev[stat]=100
                     #display
-                    print rmon.name+' K.O.'
+                    print(rmon.name+' K.O.')
                     #add xp
                     if pl.team[0].level<100:    
                         xpg = (rmon.stats.faintxp*rmon.level)/7
                         pl.team[0].xp+=xpg
-                        print pl.team[0].name+' Gained '+str(xpg)+'xp!'
-                        print str(pl.team[0].xp)+' / '+str(pl.team[0].nextxp) +' ('+str(pl.team[0].nextxp-pl.team[0].xp)+'   remaining) '
+                        print(pl.team[0].name+' Gained '+str(xpg)+'xp!')
+                        print(str(pl.team[0].xp)+' / '+str(pl.team[0].nextxp) +' ('+str(pl.team[0].nextxp-pl.team[0].xp)+'   remaining) ')
                         #level up process
                         while pl.team[0].xp >= pl.team[0].nextxp and pl.team[0].level<100:
                             pl.team[0].level += 1
@@ -321,11 +321,11 @@ def hunt(pl):
                                 else:
                                     pl.team[0].stats.calcstat(stat, pl.team[0].level)
                          
-                            print pl.team[0].name+' grew to level '+str(pl.team[0].level)+'!'
+                            print(pl.team[0].name+' grew to level '+str(pl.team[0].level)+'!')
                         #evolve process
                         if pl.team[0].evolvable:
                             if pl.team[0].level>=pl.team[0].evlvl:
-                                print pl.team[0].name +' has evolved into '+pokeclasses[pl.team[0].pokedexid]().name+'!'
+                                print(pl.team[0].name +' has evolved into '+pokeclasses[pl.team[0].pokedexid]().name+'!')
                                 tmpevmon = pokeclasses[pl.team[0].pokedexid]()
                                 pl.dex.caught(tmpevmon)
                                 tmpevmon.xp = pl.team[0].xp
@@ -343,8 +343,8 @@ def hunt(pl):
                     #$$$$$ boieeee
                     reward=rrang(1000)
                     pl.money+=reward
-                    print pl.name+' found $'+str(reward)+'!\n'
-                    raw_input('press return')
+                    print(pl.name+' found $'+str(reward)+'!\n')
+                    input('press return')
                     #break loop
                     encfin=True
                 
@@ -353,21 +353,21 @@ def hunt(pl):
                 clear()
                 #if player has usable monsters
                 if pl.countawake():
-                    print pl.name+"'s "+pl.team[0].name+' K.O.!'
-                    xxx=raw_input('\npress enter')
+                    print(pl.name+"'s "+pl.team[0].name+' K.O.!')
+                    xxx=input('\npress enter')
                     pl.team.head(pl.team.index(swapMen(pl)))
-                    print 'keep fighing '+rmon.name+'?'
+                    print('keep fighing '+rmon.name+'?')
                     swapch=pMenu(binMen)
                     if swapch=='yes':
                         pass
                     elif swapch=='no':
-                        print pl.name+' got away safely!'
-                        xxx=raw_input('\npress enter')
+                        print(pl.name+' got away safely!')
+                        xxx=input('\npress enter')
                         encfin=True
                 #blackout if no monsters usable
                 else:
-                    print pl.name+' is out of usable pokemon!'
-                    xxx=raw_input('\npress enter')
+                    print(pl.name+' is out of usable pokemon!')
+                    xxx=input('\npress enter')
                     encfin=True
 
         if inp.startswith('swap'):
@@ -375,10 +375,10 @@ def hunt(pl):
 
         if inp=='catch':
             clear() 
-            print rmon.name+'  '+str(rmon.hp)+'/'+str(rmon.stats.stats['hp'])
+            print(rmon.name+'  '+str(rmon.hp)+'/'+str(rmon.stats.stats['hp']))
             for status in rmon.status:
                 if rmon.status[status]:
-                    print status
+                    print(status)
             ball=pbMenu(pl)
             if ball:
                 pl.balls[ball]-=1
@@ -388,50 +388,50 @@ def hunt(pl):
                     if not caughtTup[1]:
                         pass
                     elif caughtTup[1]==1:
-                        print rmon.name+' resists...'
+                        print(rmon.name+' resists...')
                         sleep(1)
                     elif caughtTup[1]==2:
-                        print rmon.name+' resists...'
+                        print(rmon.name+' resists...')
                         sleep(1)
-                        print rmon.name+' resists...'
+                        print(rmon.name+' resists...')
                         sleep(1)
                     elif caughtTup[1]>2:
-                        print rmon.name+' resists...'
+                        print(rmon.name+' resists...')
                         sleep(1)
-                        print rmon.name+' resists...'
+                        print(rmon.name+' resists...')
                         sleep(1)
-                        print rmon.name+' resists...'
+                        print(rmon.name+' resists...')
                         sleep(1)        
-                    print rmon.name+' escaped!'
-                    inp=raw_input('press enter...')
+                    print(rmon.name+' escaped!')    
+                    inp=input('press enter...')
                 #if capture succeeds
                 if caughtTup[0]:
                     if not caughtTup[1]:
                         pass
                     elif caughtTup[1]==1:
-                        print rmon.name+' resists...'
+                        print(rmon.name+' resists...')
                         sleep(1)
                     elif caughtTup[1]==2:
-                        print rmon.name+' resists...'
+                        print(rmon.name+' resists...')
                         sleep(1)
-                        print rmon.name+' resists...'
+                        print(rmon.name+' resists...')
                         sleep(1)
                     elif caughtTup[1]>2:
-                        print rmon.name+' resists...'
+                        print(rmon.name+' resists...')
                         sleep(1)
-                        print rmon.name+' resists...'
+                        print(rmon.name+' resists...')
                         sleep(1)
-                        print rmon.name+' resists...'
+                        print(rmon.name+' resists...')
                         sleep(1)
-                    print rmon.name+' was captured!!'
+                    print(rmon.name+' was captured!!')
                     rmon.caught(pl)  
                     pl.dex.caught(rmon) 
-                    inp=raw_input('press enter...')                         
+                    inp=input('press enter...')                         
                     encfin=True
         if inp=='run':
             clear()
-            print pl.name+' got away safely!'
-            xxx=raw_input('\npress enter')
+            print(pl.name+' got away safely!')
+            xxx=input('\npress enter')
             encfin=True
     return True
         

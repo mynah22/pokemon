@@ -9,9 +9,9 @@ def save(pl):
         pass #add overwrite check
     fullp='saves/'+pl.name
     with open(fullp, 'w+') as f:
-       f.write(pickle.dumps(pl))   
-    print 'game saved.'
-    xxx=raw_input()
+       f.write(str(pickle.dumps(pl)))
+    print('game saved.')
+    xxx=input()
 
 def load():
     choice = pMenu(listdir('saves/'))

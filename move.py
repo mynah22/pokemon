@@ -11,8 +11,8 @@ def move(pl):
         idlist.append(borderZone)   
     clear()
 
-    print pl.name+' is in '+zonelist[pl.zone].name+'.'
-    print 'move?'
+    print(pl.name+' is in '+zonelist[pl.zone].name+'.')
+    print('move?')
     inp=pMenu(['yes', 'no'])
     if inp == 'no':
         return

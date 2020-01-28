@@ -16,28 +16,28 @@ def dexui(pl):
             sawlist.remove(poke)
             caughtlist.append(poke)
     clear()
-    print pl.name+'\n\n'
-    print 'Pokemon seen: '+str(saw)
-    print 'Pokemon captured: '+str(caught)
-    print '\n\n'
+    print(pl.name+'\n\n')
+    print('Pokemon seen: '+str(saw))
+    print('Pokemon captured: '+str(caught))
+    print('\n\n')
     inp=pMenu([
         'list uncaptured pokemon', 
         'list successfully captured pokemon', 'exit'
         ])
     if inp.startswith('list u'):
         clear()
-        print 'Seen but uncaptured pokemon:'
-        print '('+str(len(pl.dex.icn)-saw)+' unseen)\n'
+        print('Seen but uncaptured pokemon:')
+        print('('+str(len(pl.dex.icn)-saw)+' unseen)\n')
         for poke in sawlist:
-            print str(poke).zfill(3)+'  '+pl.dex.icn[poke][1]
+            print(str(poke).zfill(3)+'  '+pl.dex.icn[poke][1])
         xxx=raw_input()
 
     if inp.startswith('list s'):
         clear()
-        print 'Captured pokemon:'
-        print str(caught)+' species captured'
+        print('Captured pokemon:')
+        print(str(caught)+' species captured')
         for poke in caughtlist:
-            print pl.dex.icn[poke][1]
+            print(pl.dex.icn[poke][1])
         xxx=raw_input()
     elif inp.startswith('exit'):
         pass

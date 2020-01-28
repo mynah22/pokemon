@@ -80,8 +80,8 @@ class mon(object):
         if len(pl.team)<6:
             pl.team.append(self)
         else:
-            print 'Party full.'
-            print self.name+'sent to bank.'                        
+            print('Party full.')
+            print(self.name+'sent to bank.')
             pl.bank.append(self)
 
     def nextxpcalc(self):

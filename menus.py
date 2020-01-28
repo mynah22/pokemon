@@ -2,15 +2,15 @@ def pMenu(tarmen):
     numb=1
     for item in tarmen:
         if numb<10:
-            print str(numb)+':   '+item
+            print(str(numb)+':   '+item)
             numb+=1
         else:
-            print str(numb)+':  '+item
+            print(str(numb)+':  '+item)
             numb+=1
     fin=0
     while fin != 1:
         inval=0
-        inp=raw_input('enter menu #:')
+        inp=input('enter menu #:')
         try: 
             t=int(inp)
             if t<1 or t>len(tarmen):
@@ -18,7 +18,7 @@ def pMenu(tarmen):
         except:
             inval=1
         if inval==1:
-            print 'invalid selection.\n'
+            print('invalid selection.\n')
         else:
             fin=1         
     return tarmen[int(inp)-1]
@@ -29,17 +29,17 @@ def pbMenu(player):
     for item in player.balls:
         if player.balls[item] > 0:
             mendic[numb]=item
-            print str(numb)+':   '+item+'  x'+str(player.balls[item])
+            print(str(numb)+':   '+item+'  x'+str(player.balls[item]))
             numb+=1
     if len(mendic)<1:
-        print 'no pokeballs!\n\n'
-        xxx=raw_input('press enter')
+        print('no pokeballs!\n\n')
+        xxx=input('press enter')
         return
     else:
         fin=0
     while fin != 1:
         inval=0
-        inp=raw_input('enter menu #:')
+        inp=input('enter menu #:')
         try: 
             t=int(inp)
             if t<1 or t>len(mendic):
@@ -47,7 +47,7 @@ def pbMenu(player):
         except:
             inval=1
         if inval==1:
-            print 'invalid selection.\n'
+            print('invalid selection.\n')
         else:
             fin=1         
     return mendic[int(inp)]
@@ -60,12 +60,12 @@ def bankMenu(pl, mode='d'):
         target=pl.bank
 
     for poke in target:
-        print str(numb)+':   '+poke.name
+        print(str(numb)+':   '+poke.name)
         numb+=1
     fin=0
     while fin != 1:
         inval=0
-        inp=raw_input('enter menu #:')
+        inp=input('enter menu #:')
         try: 
             t=int(inp)
             if t<1 or t>len(target):
@@ -73,24 +73,24 @@ def bankMenu(pl, mode='d'):
         except:
             inval=1
         if inval==1:
-            print 'invalid selection.\n'
+            print('invalid selection.\n')
         else:
             fin=1         
     return target[int(inp)-1]
 
 def swapMen(pl):
     # clear()
-    print "Select lead pokemon:"
+    print("Select lead pokemon:")
     numb=1
     pokemap=[]
     for poke in pl.awakeList():
-        print str(numb)+':   '+poke.name+' ('+str(poke.hp)+')'
+        print(str(numb)+':   '+poke.name+' ('+str(poke.hp)+')')
         numb+=1
         pokemap.append(poke)
     fin=0
     while fin != 1:
         inval=0
-        inp=raw_input('enter menu #:')
+        inp=input('enter menu #:')
         try: 
             t=int(inp)
             if t<1 or t>len(pokemap):
@@ -98,7 +98,7 @@ def swapMen(pl):
         except:
             inval=1
         if inval==1:
-            print 'invalid selection.\n'
+            print('invalid selection.\n')
         else:
             fin=1         
     return pokemap[t-1]
@@ -117,11 +117,11 @@ def atkMenu(castingMon):
         #returns 5 if no moves available
     for moveID in usableAtks:
         move = castingMon.moveset[moveID]
-        print str(moveID)+':  '+move.name+'   '+str(move.remainingUsagePoints)+'/'+str(move.maxUsagePoints)
+        print(str(moveID)+':  '+move.name+'   '+str(move.remainingUsagePoints)+'/'+str(move.maxUsagePoints))
     fin=0
     while fin != 1:
         inval=0
-        inp=raw_input('enter menu #:')
+        inp=input('enter menu #:')
         try: 
             t=int(inp)
             if t<1 or not usableAtks.count(t):
@@ -129,7 +129,7 @@ def atkMenu(castingMon):
         except:
             inval=1
         if inval==1:
-            print 'invalid selection.\n'
+            print('invalid selection.\n')
         else:
             fin=1         
     return int(inp)
